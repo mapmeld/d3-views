@@ -7,34 +7,61 @@
 body {
   font-family: sans-serif;
 }
-div {
+.map {
   border: 1px solid #000;
   height: 500px;
   width: 960px;
 }
+#sidebar {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  border: 1px solid #000;
+  box-shadow: 1px 2px 2px #444;
+  padding: 10px;
+}
+select {
+  font-size: 14pt;
+  padding: 8px;
+}
     </style>
   </head>
   <body>
+    <div id="sidebar">
+      <h4>Variable</h4>
+      <select disabled>
+        <option value="none">None</option>
+        <option value="over_65">Pop. over 65 (%)</option>
+        <option value="english">Speak English "not well" / "not at all" (%)</option>
+        <!-- <option value="poverty">Poverty level (total)</option> -->
+        <option value="poverty_percent">Poverty level (%)</option>
+        <option value="poverty_seniors_percent">Seniors in poverty (%)</option>
+        <option value="poverty_kids">Kids and teens in poverty</option>
+        <option value="grandchildren">Grandparents caring for grandchildren</option>
+      </select>
+      <br/>
+      <small>Data from ACS 5yr completed 2018</small>
+    </div>
     <h2>State Level</h2>
-    <div id="ma_map">
+    <div id="ma_map" class="map">
       Loading...
     </div>
     <h2>Boston Metro</h2>
-    <div id="boston_map">
+    <div id="boston_map" class="map">
       Loading...
     </div>
     <h2>Worcester</h2>
-    <div id="worcester_map">
+    <div id="worcester_map" class="map">
       Loading...
     </div>
     <h2>Springfield</h2>
-    <div id="springfield_map">
+    <div id="springfield_map" class="map">
       Loading...
     </div>
     <script src="//d3js.org/d3.v5.min.js"></script>
     <script src="//d3js.org/d3-geo.v1.min.js"></script>
     <script src="//unpkg.com/topojson@3"></script>
-    <script src="./preview.js">
+    <script src="./preview.js?v=2">
     </script>
   </body>
 </html>
