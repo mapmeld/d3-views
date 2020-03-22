@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>MA Maps</title>
+    <style>
+body {
+  font-family: sans-serif;
+}
+div {
+  border: 1px solid #000;
+  height: 500px;
+  width: 960px;
+}
+    </style>
+  </head>
+  <body>
+    <h2>State Level</h2>
+    <div id="ma_map">
+      Loading...
+    </div>
+    <h2>Boston Metro</h2>
+    <div id="boston_map">
+      Loading...
+    </div>
+    <h2>Worcester</h2>
+    <div id="worcester_map">
+      Loading...
+    </div>
+    <h2>Springfield</h2>
+    <div id="springfield_map">
+      Loading...
+    </div>
+    <script src="//d3js.org/d3.v5.min.js"></script>
+    <script src="//d3js.org/d3-geo.v1.min.js"></script>
+    <script src="//unpkg.com/topojson@3"></script>
+    <script src="./preview.js">
+    </script>
+  </body>
+</html>
