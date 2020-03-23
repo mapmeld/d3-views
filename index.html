@@ -20,9 +20,28 @@ body {
   box-shadow: 1px 2px 2px #444;
   padding: 10px;
 }
+#legend {
+  display: none;
+  margin-top: 25px;
+}
 select {
   font-size: 14pt;
   padding: 8px;
+}
+.square {
+  display: block;
+}
+.square .box {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border: 1px solid #000;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.square .number {
+  vertical-align: middle;
 }
     </style>
   </head>
@@ -37,8 +56,32 @@ select {
         <option value="poverty_percent">Poverty level (%)</option>
         <option value="poverty_seniors_percent">Seniors in poverty (%)</option>
         <option value="poverty_kids">Kids and teens in poverty</option>
+        <option value="large_households">Large households (6+) (%)</option>
         <option value="grandchildren">Grandparents caring for grandchildren</option>
       </select>
+      <br/>
+      <div id="legend">
+        <div class="square">
+          <span class="box"></span>
+          <span class="number"></span>
+        </div>
+        <div class="square">
+          <span class="box"></span>
+          <span class="number"></span>
+        </div>
+        <div class="square">
+          <span class="box"></span>
+          <span class="number"></span>
+        </div>
+        <div class="square">
+          <span class="box"></span>
+          <span class="number"></span>
+        </div>
+        <div class="square">
+          <span class="box"></span>
+          <span class="number"></span>
+        </div>
+      </div>
       <br/>
       <small>Data from ACS 5yr completed 2018</small>
     </div>

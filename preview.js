@@ -31,10 +31,111 @@ const places = {
 let gj = null,
     ma_data = null,
     selection = null;
+
+function formatNumber(num) {
+  if (num <= 1.0) {
+    return Math.round(num * 100) + '%';
+  }
+  return num;
+}
+
+function drawLegend(colorbreaks) {
+  if (!colorbreaks) {
+    document.querySelector('#legend').style.display = "none";
+    return null;
+  }
+
+  document.querySelector('#legend').style.display = "block";
+  document.querySelectorAll('.square .box').forEach((box, index) => {
+    if (index) {
+      box.style.backgroundColor = colorbreaks[index - 1].color;
+    }
+  });
+  let lastMax = 0;
+  document.querySelectorAll('.square .number').forEach((box, index) => {
+    if (!index) {
+      // 0-th white box
+      box.innerText = '0' + (colorbreaks[0].max > 1 ? '' : '%') + ' - ' + formatNumber(colorbreaks[0].min);
+      lastMax = colorbreaks[0].min;
+    } else if (index === colorbreaks.length) {
+      // last box
+      box.innerText = '≥ ' + formatNumber(lastMax);
+    } else {
+      box.innerText = formatNumber(lastMax) + ' - ' + formatNumber(colorbreaks[index - 1].max);
+      lastMax = colorbreaks[index - 1].max;
+    }
+  });
+
+  return (val) => {
+    if (val <= colorbreaks[0].min) {
+      return "#fff";
+    }
+    for (let c = 0; c < colorbreaks.length - 1; c++) {
+      if (colorbreaks[c].max > val) {
+        return colorbreaks[c].color;
+      }
+    }
+    return colorbreaks[colorbreaks.length - 1].color;
+  };
+}
+
 function paintMap() {
+  let coloration = null;
   Object.keys(places).forEach((place) => {
     document.querySelector("#" + place + "_map").innerHTML = "";
   });
+  if (selection === "english") {
+    coloration = drawLegend([
+      {min: 0.1, max: 0.2, color: "#edf8e9"},
+      {max: 0.3, color: "#bae4b3"},
+      {max: 0.4, color: "#74c476"},
+      {max: 1.0, color: "#238b45"}
+    ]);
+  } else if (selection === "grandchildren") {
+    coloration = drawLegend([
+      {min: 10, max: 20, color: "#eff3ff"},
+      {max: 30, color: "#bdd7e7"},
+      {max: 40, color: "#6baed6"},
+      {max: 10000000, color: "#2171b5"}
+    ]);
+  } else if (selection === "large_households") {
+    coloration = drawLegend([
+      {min: 0.1, max: 0.2, color: "#edf8e9"},
+      {max: 0.3, color: "#bae4b3"},
+      {max: 0.4, color: "#74c476"},
+      {max: 1.0, color: "#238b45"}
+    ]);
+  } else if (selection === "poverty_percent") {
+    coloration = drawLegend([
+      {min: 0.08, max: 0.16, color: "#f2f0f7"},
+      {max: 0.24, color: "#cbc9e2"},
+      {max: 0.32, color: "#9e9ac8"},
+      {max: 1.0, color: "#6a51a3"}
+    ]);
+  } else if (selection === "poverty_seniors_percent") {
+    coloration = drawLegend([
+      {min: 0.1, max: 0.2, color: "#eff3ff"},
+      {max: 0.3, color: "#bdd7e7"},
+      {max: 0.4, color: "#6baed6"},
+      {max: 1.0, color: "#2171b5"}
+    ]);
+  } else if (selection === "poverty_kids") {
+    coloration = drawLegend([
+      {min: 100, max: 200, color: "#eff3ff"},
+      {max: 300, color: "#bdd7e7"},
+      {max: 400, color: "#6baed6"},
+      {max: 10000000, color: "#2171b5"}
+    ]);
+  } else if (selection === "over_65") {
+    coloration = drawLegend([
+      {min: 0.1, max: 0.2, color: "#eff3ff"},
+      {max: 0.3, color: "#bdd7e7"},
+      {max: 0.4, color: "#6baed6"},
+      {max: 1.0, color: "#2171b5"}
+    ]);
+  } else {
+    coloration = drawLegend(null);
+  }
   Object.keys(places).forEach((place) => {
     let my_svg = d3.select("#" + place + "_map")
       .append("svg")
@@ -54,51 +155,30 @@ function paintMap() {
         } else {
           let total_pop = ma_data[id].total_pop,
               tract_id = id.substring(0, id.length - 1),
-              pct = 0, sum = 0;
+              val = 0;
           if (selection === "english") {
             Object.keys(ma_data[id])
               .filter(key => key.includes("some_english") || key.includes("no_english"))
-              .forEach(key => { pct += ma_data[id][key] });
-            pct /= total_pop;
-            if (pct < 0.1) {
-              return "#fff";
-            } else if (pct < 0.2) {
-              return "#edf8e9";
-            } else if (pct < 0.3) {
-              return "#bae4b3";
-            } else if (pct < 0.4) {
-              return "#74c476";
-            } else {
-              return "#238b45";
-            }
+              .forEach(key => { val += ma_data[id][key] });
+            val /= total_pop;
+            return coloration(val);
           } else if (selection === "grandchildren") {
-            sum = ma_data[tract_id]["grandparent_grandchildren"];
-            if (sum < 10) {
-              return "#fff";
-            } else if (sum < 20) {
-              return "#eff3ff";
-            } else if (sum < 30) {
-              return "#bdd7e7";
-            } else if (sum < 40) {
-              return "#6baed6";
-            } else {
-              return "#2171b5";
-            }
+            val = ma_data[tract_id]["grandparent_grandchildren"];
+            return coloration(val);
+          } else if (selection === "large_households") {
+            Object.keys(ma_data[id])
+              .filter(key => key.includes("fam_6") || key.includes("fam_7"))
+              .forEach(key => {
+                val += key.includes("fam_6")
+                  ? ma_data[id][key] * 6
+                  : ma_data[id][key] * 7
+              });
+            val /= total_pop;
+            return coloration(val);
           } else if (selection === "poverty_percent") {
             let tract_pop = ma_data[tract_id].total_pop;
-            sum = ma_data[tract_id]["poverty_total"];
-            pct = sum / tract_pop;
-            if (pct < 0.08) {
-              return "#fff";
-            } else if (pct < 0.16) {
-              return "#f2f0f7";
-            } else if (pct < 0.24) {
-              return "#cbc9e2";
-            } else if (pct < 0.32) {
-              return "#9e9ac8";
-            } else {
-              return "#6a51a3";
-            }
+            val = ma_data[tract_id]["poverty_total"] / tract_pop;
+            return coloration(val);
           } else if (selection === "poverty_seniors_percent") {
             let elder_sum = 0;
             for (let bg = 0; bg < 10; bg++) {
@@ -115,34 +195,14 @@ function paintMap() {
             }
             Object.keys(ma_data[tract_id])
               .filter(key => ["poverty_m_65_74", "poverty_m_75_plus", "poverty_f_65_74", "poverty_f_75_plus"].includes(key))
-              .forEach(key => { sum += ma_data[tract_id][key] });
-            pct = sum / elder_sum;
-            if (pct < 0.1) {
-              return "#fff";
-            } else if (pct < 0.2) {
-              return "#eff3ff";
-            } else if (pct < 0.3) {
-              return "#bdd7e7";
-            } else if (pct < 0.4) {
-              return "#6baed6";
-            } else {
-              return "#2171b5";
-            }
+              .forEach(key => { val += ma_data[tract_id][key] });
+            val /= elder_sum;
+            return coloration(val);
           } else if (selection === "poverty_kids") {
             Object.keys(ma_data[tract_id])
               .filter(key => key.includes("poverty_m_kids") || key.includes("poverty_f_kids"))
-              .forEach(key => { sum += ma_data[tract_id][key] });
-            if (sum < 100) {
-              return "#fff";
-            } else if (sum < 200) {
-              return "#eff3ff";
-            } else if (sum < 300) {
-              return "#bdd7e7";
-            } else if (sum < 400) {
-              return "#6baed6";
-            } else {
-              return "#2171b5";
-            }
+              .forEach(key => { val += ma_data[tract_id][key] });
+            return coloration(val);
           } else if (selection === "over_65") {
             Object.keys(ma_data[id])
               .filter(key => key.includes("65_66") || key.includes("67_69")
@@ -150,19 +210,9 @@ function paintMap() {
                 || key.includes("75_79")
                 || key.includes("80_84")
                 || key.includes("85_plus"))
-              .forEach(key => { pct += ma_data[id][key] });
-            pct /= total_pop;
-            if (pct < 0.1) {
-              return "#fff";
-            } else if (pct < 0.2) {
-              return "#eff3ff";
-            } else if (pct < 0.3) {
-              return "#bdd7e7";
-            } else if (pct < 0.4) {
-              return "#6baed6";
-            } else {
-              return "#2171b5";
-            }
+              .forEach(key => { val += ma_data[id][key] });
+            val /= total_pop;
+            return coloration(val);
           }
         }
       });
