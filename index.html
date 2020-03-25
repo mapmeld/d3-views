@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>MGGG on Dorms and Hospital Beds</title>
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <link
+            href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600"
+            rel="stylesheet"
+        />
     <script src="//api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
     <link href="//api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
@@ -13,28 +17,65 @@ html, body {
   width: 100%;
 }
 body {
-  font-family: sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   padding: 20px;
+  text-align: center;
+  font-size: 120%;
+  line-height: 150%;
+}
+h2, h3 {
+  font-weight: bold;
+}
+p, ul {
+  width: 60%;
+  margin-left: 20%;
+}
+@media (max-width: 1000px) {
+  p, ul {
+    width: 80%;
+    margin-left: 10%;
+  }
 }
 .map {
   border: 1px solid #ccc;
   height: 500px;
+  max-height: 80vh;
   width: 100%;
 }
-.my_tooltip {
-  position: relative;
-  top: -100px;
-  left: 20px;
-  border: 2px solid #ccc;
-  width: 40%;
-  padding: 3px;
-  height: 30px;
-  font-size: 15px;
-  transition: 0.5s;
-  visibility: hidden;
+li, td {
+  text-align: left;
 }
-circle, rect {
-  cursor: pointer;
+.circle {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+}
+li.legend {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 15px;
+}
+li.legend span {
+  vertical-align: middle;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.box {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 10px
+}
+.box .italic {
+  font-style: italic;
+}
+.table {
+  width: 80%;
+  margin-left: 10%;
 }
     </style>
   </head>
@@ -42,12 +83,35 @@ circle, rect {
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
-          <h2>Utilizing college dorms</h2>
+          <h2>Responding to Coronavirus</h2>
+          <h3>College campuses can help increase hospital capacity</h3>
+          <br/>
           <p>
-            We analyzed the capacity of hospitals and college dorms across Massachusetts
-            to house hospital staff and patients who do not have coronavirus, if the
+            We analyzed the capacity of colleges across the United States
+            to house hospital staff and patients without coronavirus, if
             hospitals reach capacity.
           </p>
+          <p>
+            At Tufts University's MGGG Redistricting Lab, we used our expertise in transport
+            analysis to connect hospitals to nearby colleges.
+            We input the latest available data on college dorms and hospital beds.
+          </p>
+
+          <br/>
+
+          <div class="box">
+            <li class="legend">
+              <span class="circle red"></span>
+              <span>Hospitals</span>
+            </li>
+            <li class="legend">
+              <span class="circle blue"></span>
+              <span>Colleges</span>
+            </li>
+            <li class="legend italic">
+              size is proportional to number of beds
+            </li>
+          </div>
           <div id="ma_map" class="map">
             Loading map...
           </div>

@@ -30,7 +30,7 @@ map.on('load', function() {
       type: 'circle',
       source: 'hospitals',
       paint: {
-        'circle-radius': ["*", ["sqrt", ["get", "BEDCOUNT"]], 0.4],
+        'circle-radius': ["*", ["sqrt", ["get", "BEDCOUNT"]], 0.3],
         'circle-color': 'rgb(255, 50, 50)',
         'circle-opacity': 0.9
       }
@@ -61,7 +61,7 @@ map.on('load', function() {
         type: 'circle',
         source: 'colleges',
         paint: {
-          'circle-radius': ["*", ["sqrt", ["get", "DORMCAP"]], 0.2],
+          'circle-radius': ["*", ["sqrt", ["get", "DORMCAP"]], 0.3],
           'circle-color': '#00f',
           'circle-opacity': 0.4
         }
