@@ -15,7 +15,9 @@ function hoverLayer(layer) {
   map.on('mouseenter', layer, function(e) {
     map.getCanvas().style.cursor = 'pointer';
 
-    var name = e.features[0].properties.NAME || e.features[0].properties.COLLEGE;
+    var name = e.features[0].properties.NAME
+      || e.features[0].properties.FAC_NAME
+      || e.features[0].properties.COLLEGE;
     popup
       .setLngLat(e.features[0].geometry.coordinates)
       .setHTML(name)
@@ -44,12 +46,12 @@ map.on('load', function() {
   fetch("./ma_patient_results_20200325_v1.json").then(function(res) { return res.json() }).then(function(links) {
     // have links but want to add coordinates
 
-    fetch("./ma_hospitals.geojson").then(function(res) { return res.json() }).then(function(hospitals) {
+    fetch("./ma_hospitals.geojson?v=3").then(function(res) { return res.json() }).then(function(hospitals) {
       hospitals.features.forEach(function (feature) {
         // feature.id = index;
         // index++;
         links.forEach(function (link, index) {
-          if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
+          if ([feature.properties.NAME, feature.properties.FAC_NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
             link.hospital = feature.geometry.coordinates;
           }
         });
@@ -62,13 +64,13 @@ map.on('load', function() {
 
       fetch("./ma_colleges.geojson?v=2").then(function(res) { return res.json() }).then(function(colleges) {
         colleges.features = colleges.features.filter(function (college) {
-          if (college.properties.COLLEGE === "Boston College") {
+          if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
             return college.properties.CAMPUS === "Main Campus";
           }
           return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
           "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
           "Boston University", "Wentworth Institute of Technology",
-          /*"Northeastern University",*/
+          "Northeastern University",
           "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
           "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
           "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
