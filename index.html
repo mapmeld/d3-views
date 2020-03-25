@@ -41,8 +41,11 @@ h1 {
   font-size: 240%;
   line-height: 50%;
 }
-h2 {
+h2, h4 {
   font-weight: normal;
+}
+h3 {
+  line-height: 0%;
 }
 @media (max-width: 1000px) {
   p, ul, h2, h3 {
@@ -79,8 +82,14 @@ li.legend span {
 .red {
   background-color: red;
 }
+.redtext {
+  color: red;
+}
 .blue {
   background-color: blue;
+}
+.bluetext {
+  color: blue;
 }
 .box {
   border: 1px solid #ccc;
@@ -130,12 +139,16 @@ li.legend span {
       </p>
       <p>
         At Tufts University's MGGG Redistricting Lab, we used our expertise in geospatial
-        analysis to connect hospitals to nearby college campuses.
+        analysis to connect <span class="redtext">hospitals</span> to nearby
+        <span class="bluetext">college campuses</span>.
         We analyzed the ability of colleges across the United States to house hospital
         staff and patients when hospitals reach capacity.
       </p>
 
       <br/>
+
+      <h3>Where are the beds?</h3>
+      <h4>Number of hospital and dorm beds</h4>
 
       <div class="box">
         <li class="legend">
@@ -151,11 +164,16 @@ li.legend span {
           <span>size is proportional to number of beds</span>
         </li>
       </div>
-
       <div id="ma_map" class="map">
         Loading map...
         JavaScript must be enabled
       </div>
+      <p>
+        <em>
+          Don't see your hospital or college?
+          Provide feedback <a href="https://forms.gle/YNYYGpTu7LTqW4XH6">here</a>.
+        </em>
+      </p>
 
       <br/><br/>
 
@@ -179,7 +197,6 @@ li.legend span {
           <thead>
             <tr>
               <th>College</th>
-              <th>Campus</th>
               <th>City</th>
               <th>Dorms</th>
               <th>staff_assigned</th>
@@ -194,13 +211,13 @@ li.legend span {
 
       <br/><br/>
 
-      <h3>Contact us</h3>
+      <!-- <h3>Contact us</h3>
       <p>
         For updates and revisions to our data, please contact us:
         <br/>
         <br/>
         <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" class="btn">Contact Form</a>
-      </p>
+      </p> -->
     </div>
 
     <!-- Fetch polyfill for old old browsers -->

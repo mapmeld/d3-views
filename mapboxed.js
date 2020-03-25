@@ -62,7 +62,7 @@ map.on('load', function() {
         data: hospitals
       });
 
-      fetch("./ma_colleges.geojson?v=2").then(function(res) { return res.json() }).then(function(colleges) {
+      fetch("./ma_colleges.geojson?v=3").then(function(res) { return res.json() }).then(function(colleges) {
         colleges.features = colleges.features.filter(function (college) {
           if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
             return college.properties.CAMPUS === "Main Campus";
@@ -86,12 +86,15 @@ map.on('load', function() {
             if (link.college === college.properties.COLLEGE) {
               link.college = college.geometry.coordinates;
             }
-          })
+          });
+          if (college.properties.CAMPUS) {
+            college.properties.COLLEGE += "  (" + college.properties.CAMPUS + ")";
+          }
 
           var row = $('<tr>');
           $('tbody').append(row);
 
-          ["COLLEGE", "CAMPUS", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
+          ["COLLEGE", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
             var cell = $('<td>');
             if (college.properties[column]) {
               cell.text(isNaN(1 * (college.properties[column]))
