@@ -41,7 +41,7 @@ map.on('load', function() {
   map.addControl(new mapboxgl.NavigationControl());
 
   // var index = 0;
-  fetch("./links.json").then(function(res) { return res.json() }).then(function(links) {
+  fetch("./ma_patient_results_20200325_v1.json").then(function(res) { return res.json() }).then(function(links) {
     // have links but want to add coordinates
 
     fetch("./ma_hospitals.geojson").then(function(res) { return res.json() }).then(function(hospitals) {
@@ -49,7 +49,7 @@ map.on('load', function() {
         // feature.id = index;
         // index++;
         links.forEach(function (link, index) {
-          if (link.hospital === feature.properties.NAME) {
+          if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
             link.hospital = feature.geometry.coordinates;
           }
         });
@@ -59,17 +59,6 @@ map.on('load', function() {
         type: 'geojson',
         data: hospitals
       });
-      map.addLayer({
-        id: 'hospitals',
-        type: 'circle',
-        source: 'hospitals',
-        paint: {
-          'circle-radius': ["*", ["sqrt", ["get", "BEDCOUNT"]], 0.3],
-          'circle-color': 'rgb(255, 50, 50)',
-          'circle-opacity': 0.9
-        }
-      });
-      hoverLayer('hospitals');
 
       fetch("./ma_colleges.geojson?v=2").then(function(res) { return res.json() }).then(function(colleges) {
         colleges.features = colleges.features.filter(function (college) {
@@ -116,6 +105,48 @@ map.on('load', function() {
           type: 'geojson',
           data: colleges
         });
+
+        var linkData = {
+          type: "FeatureCollection",
+          features: links.map(function (link) {
+            return {
+              type: "Feature",
+              geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
+              properties: {weight:link.weight}
+            }
+          })
+        };
+
+        console.log(linkData.features.filter(function(f) {
+          return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
+        }));
+
+        map.addSource('links', {
+          type: 'geojson',
+          data: linkData
+        });
+        map.addLayer({
+          id: 'links',
+          type: 'line',
+          source: 'links',
+          paint: {
+            'line-color': '#000',
+            'line-width': ["*", ["get", "weight"], 0.02]
+          }
+        });
+
+        map.addLayer({
+          id: 'hospitals',
+          type: 'circle',
+          source: 'hospitals',
+          paint: {
+            'circle-radius': ["*", ["sqrt", ["get", "BEDCOUNT"]], 0.3],
+            'circle-color': 'rgb(255, 50, 50)',
+            'circle-opacity': 0.9
+          }
+        });
+        hoverLayer('hospitals');
+
         map.addLayer({
           id: 'colleges',
           type: 'circle',
@@ -127,30 +158,6 @@ map.on('load', function() {
           }
         });
         hoverLayer('colleges');
-
-        var linkData = {
-          type: "FeatureCollection",
-          features: links.map(function (link) {
-            return {
-              type: "Feature",
-              geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
-              properties: {}
-            }
-          })
-        };
-        map.addSource('links', {
-          type: 'geojson',
-          data: linkData
-        });
-        map.addLayer({
-          id: 'links',
-          type: 'line',
-          source: 'links',
-          paint: {
-            'line-color': '#000',
-            'line-width': 2
-          }
-        });
       });
     });
   });
