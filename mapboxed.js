@@ -47,7 +47,7 @@ map.on('load', function() {
   map.addControl(new mapboxgl.NavigationControl());
 
   // var index = 0;
-  fetch("./ma_patient_results_20200325_v1.json").then(function(res) { return res.json() }).then(function(links) {
+  fetch("./ma_combined_results_20200325_v3.json").then(function(res) { return res.json() }).then(function(links) {
     // have links but want to add coordinates
 
     fetch("./ma_hospitals.geojson?v=3").then(function(res) { return res.json() }).then(function(hospitals) {
@@ -111,21 +111,7 @@ map.on('load', function() {
           if (college.properties.CAMPUS) {
             college.properties.COLLEGE += "  (" + college.properties.CAMPUS + ")";
           }
-
-          var row = $('<tr>');
-          $('#colleges tbody').append(row);
-
-          ["COLLEGE", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
-            var cell = $('<td>');
-            if (college.properties[column]) {
-              cell.text(isNaN(1 * (college.properties[column]))
-                ? college.properties[column]
-                : (1 * college.properties[column]).toLocaleString());
-            }
-            row.append(cell);
-          });
         });
-        $('#colleges').DataTable();
 
         map.addSource('colleges', {
           type: 'geojson',
@@ -143,9 +129,9 @@ map.on('load', function() {
           })
         };
 
-        console.log(linkData.features.filter(function(f) {
-          return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
-        }));
+        // console.log(linkData.features.filter(function(f) {
+        //   return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
+        // }));
 
         map.addSource('links', {
           type: 'geojson',
@@ -157,7 +143,7 @@ map.on('load', function() {
           source: 'links',
           paint: {
             'line-color': '#000',
-            'line-width': ["*", ["get", "weight"], 0.02]
+            'line-width': ["*", ["get", "weight"], 0.015]
           }
         });
 
@@ -186,5 +172,30 @@ map.on('load', function() {
         hoverLayer('colleges');
       });
     });
+  });
+});
+
+// CSV stuff
+$(document).ready(function() {
+  fetch("./ma_ed_inst_assignments_20200325_v3.csv").then(function(res) { return res.text() }).then(function (college_csv) {
+    college_csv.split("\n").slice(1).sort().forEach(function(r) {
+      var college = r.split(","),
+          row = $('<tr>');
+      if (!r.length) {
+        return;
+      }
+      $('#colleges tbody').append(row);
+
+      college.forEach(function (column) {
+        var cell = $('<td>');
+        if (column) {
+          cell.text(isNaN(1 * column)
+            ? column
+            : (1 * column).toLocaleString());
+        }
+        row.append(cell);
+      });
+    });
+    $('#colleges').DataTable();
   });
 });

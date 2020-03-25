@@ -1,0 +1,32 @@
+Name,City,Beds,Hospital staff,Patients,Utilization (%)
+Wheaton College,Norton,1631,554,424,59.9
+Stonehill College,Easton,2198,681,638,60.0
+Springfield College,Springfield,2144,754,532,59.9
+Western New England University,Springfield,2000,484,45,26.4
+College of the Holy Cross,Worcester,2507,195,91,11.4
+Curry College,Milton,1543,498,428,60.0
+Tufts University,Medford,3695,615,220,22.5
+Boston College,Chestnut Hill,5635,0,0,0.0
+Boston University,Boston,11524,571,127,6.0
+Wentworth Institute of Technology,Boston,2193,532,784,60.0
+Northeastern University,Boston,9517,2249,96,24.6
+Emmanuel College,Boston,1395,467,370,60.0
+Clark University,Worcester,1664,550,54,36.2
+Mount Holyoke College,South Hadley,2193,246,115,16.4
+Worcester Polytechnic Institute,Worcester,2240,635,709,60.0
+Wellesley College,Wellesley,2209,230,107,15.2
+Assumption College,Worcester,1859,468,9,25.6
+Babson College,Wellesley,1890,820,190,53.4
+Smith College,Northampton,2397,172,80,10.5
+Hampshire College,Amherst,1182,0,0,0.0
+Bentley University,Waltham,3421,385,144,15.4
+Emerson College,Boston,1953,1028,145,60.0
+Suffolk University,Boston,1653,503,489,60.0
+Massachusetts Institute of Technology,Cambridge,5975,0,0,0.0
+Brandeis University,Waltham,2950,0,0,0.0
+Amherst College,Amherst,1837,0,0,0.0
+Lesley University,Cambridge,888,328,205,60.0
+Endicott College,Beverly,2547,625,250,34.3
+Gordon College,Wenham,1572,59,28,5.5
+Merrimack College,North Andover,2613,1009,559,60.0
+Williams College,Williamstown,2014,243,113,17.6
