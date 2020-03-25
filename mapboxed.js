@@ -11,6 +11,10 @@ var popup = new mapboxgl.Popup({
   closeOnClick: false
 });
 
+function toggleLines(e) {
+  map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
+}
+
 function hoverLayer(layer) {
   map.on('mouseenter', layer, function(e) {
     map.getCanvas().style.cursor = 'pointer';
@@ -50,12 +54,29 @@ map.on('load', function() {
       hospitals.features.forEach(function (feature) {
         // feature.id = index;
         // index++;
+
+        feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
         links.forEach(function (link, index) {
-          if ([feature.properties.NAME, feature.properties.FAC_NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
+          if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
             link.hospital = feature.geometry.coordinates;
           }
         });
+
+        var row = $('<tr>');
+        $('#hospitals tbody').append(row);
+
+        ["NAME", "TOWN", "BEDCOUNT"].forEach(function (column) {
+          var cell = $('<td>');
+          if (feature.properties[column]) {
+            cell.text(isNaN(1 * (feature.properties[column]))
+              ? feature.properties[column]
+              : (1 * feature.properties[column]).toLocaleString());
+          }
+          row.append(cell);
+        });
+
       });
+      $('#hospitals').DataTable();
 
       map.addSource('hospitals', {
         type: 'geojson',
@@ -92,7 +113,7 @@ map.on('load', function() {
           }
 
           var row = $('<tr>');
-          $('tbody').append(row);
+          $('#colleges tbody').append(row);
 
           ["COLLEGE", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
             var cell = $('<td>');
@@ -104,7 +125,7 @@ map.on('load', function() {
             row.append(cell);
           });
         });
-        $('.table').DataTable();
+        $('#colleges').DataTable();
 
         map.addSource('colleges', {
           type: 'geojson',

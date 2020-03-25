@@ -9,135 +9,12 @@
     <script src="//api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
     <link href="//api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
-    <style>
-html, body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: content-box;
-}
-body {
-  font-family: "Source Sans Pro", sans-serif;
-  text-align: center;
-  font-size: 120%;
-  line-height: 150%;
-}
-.header {
-  background: #000;
-  width: 100%;
-  color: #fff;
-  margin: 0;
-  padding: 20px;
-}
-.container {
-  padding: 20px;
-  width: 100%;
-}
-h1 {
-  font-size: 240%;
-  line-height: 50%;
-}
-h2, h4 {
-  font-weight: normal;
-}
-h3 {
-  line-height: 0%;
-}
-p, ul, h1, h2 {
-  width: 70%;
-  margin-left: 15%;
-}
-@media (max-width: 1000px) {
-  p, ul, h2, h3 {
-    width: 80%;
-    margin-left: 10%;
-  }
-}
-.map {
-  border: 1px solid #ccc;
-  height: 500px;
-  max-height: 80vh;
-  width: 70%;
-  /* width: calc(80% - 60px); */
-  margin-left: 15%;
-  /* margin-right: 10px; */
-}
-.box {
-  border: 1px solid #ccc;
-  border-bottom: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 70%;
-  margin-left: 15%;
-  /* width: 100%;
-  width: calc(100% - 80px); */
-  /* margin-left: 10px;
-  margin-right: 10px; */
-}
-p, li, td {
-  text-align: left;
-}
-.circle {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
-}
-li.legend {
-  list-style-type: none;
-  display: inline-block;
-  margin-right: 15px;
-}
-li.legend span {
-  vertical-align: middle;
-}
-.red {
-  background-color: red;
-}
-.redtext {
-  color: red;
-}
-.blue {
-  background-color: blue;
-}
-.bluetext {
-  color: blue;
-}
-
-.box .italic {
-  font-style: italic;
-}
-.table-container {
-  width: 80%;
-  margin-left: 10%;
-}
-th {
-  background: #000;
-  color: #fff;
-  font-weight: bold;
-}
-.btn {
-  background-color: #4C50AF;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-.btn:hover {
-  border: 2px solid #000;
-}
-.mapboxgl-popup {
-  max-width: 400px;
-}
-    </style>
+    <link rel="stylesheet" href="./homemap.css"/>
   </head>
   <body>
     <div class="header">
       <h1>Coronavirus Pandemic Response</h1>
-      <h2>Vacant college campuses can provide much-needed support for hospitals in distress</h2>
+      <h2>College campuses can provide much-needed support for hospitals in distress</h2>
     </div>
     <div class="container">
       <p>
@@ -157,7 +34,7 @@ th {
       <br/>
 
       <h3>Where are the beds?</h3>
-      <h4>Number of hospital and dorm beds</h4>
+      <!-- <h4>Number of hospital and dorm beds</h4> -->
 
       <div class="box">
         <li class="legend">
@@ -167,6 +44,12 @@ th {
         <li class="legend">
           <span class="circle blue"></span>
           <span>Colleges</span>
+        </li>
+        <li class="legend">
+          <label>
+            <input id="travel_lines" type="checkbox" checked onchange="toggleLines(event)"/>
+            <span>Travel Lines</span>
+          </label>
         </li>
         <li class="legend italic">
           <span class="circle"></span>
@@ -201,8 +84,8 @@ th {
       <br/><br/>
 
       <div class="table-container">
-        <h3>Data Table</h3>
-        <table class="table display">
+        <h3>Data Tables</h3>
+        <table id="colleges" class="table display">
           <thead>
             <tr>
               <th>College</th>
@@ -211,6 +94,19 @@ th {
               <th>Hospital staff assigned by the model</th>
               <th>Patients assigned by the model</th>
               <th>Utilization (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <br/>
+        <br/>
+        <table id="hospitals" class="table display">
+          <thead>
+            <tr>
+              <th>Hospital</th>
+              <th>City</th>
+              <th>Number of beds</th>
             </tr>
           </thead>
           <tbody>
