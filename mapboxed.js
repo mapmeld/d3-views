@@ -4,10 +4,20 @@ var map = new mapboxgl.Map({
   container: 'ma_map',
   style: 'mapbox://styles/mapbox/light-v10',
   center: [-71.5, 42.12],
-  zoom: 7
+  zoom: 7,
 });
 
 map.on('load', function() {
+
+  var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    marker: {
+      color: 'orange'
+    },
+    mapboxgl: mapboxgl
+  });
+  map.addControl(geocoder);
+  map.addControl(new mapboxgl.NavigationControl());
 
   fetch("./ma_hospitals.geojson").then(function(res) { return res.json() }).then(function(hospitals) {
 
