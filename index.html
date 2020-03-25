@@ -1,110 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>MA Maps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>MGGG on Dorms and Hospital Beds</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
     <style>
 body {
   font-family: sans-serif;
+  padding: 20px;
 }
 .map {
-  border: 1px solid #000;
+  border: 1px solid #ccc;
   height: 500px;
   width: 960px;
 }
-#sidebar {
-  position: fixed;
-  right: 15px;
-  top: 15px;
-  border: 1px solid #000;
-  box-shadow: 1px 2px 2px #444;
-  padding: 10px;
+.my_tooltip {
+  position: relative;
+  top: -100px;
+  left: 20px;
+  border: 2px solid #ccc;
+  width: 40%;
+  padding: 3px;
+  height: 30px;
+  font-size: 15px;
+  transition: 0.5s;
+  visibility: hidden;
 }
-#legend {
-  display: none;
-  margin-top: 25px;
-}
-select {
-  font-size: 14pt;
-  padding: 8px;
-}
-.square {
-  display: block;
-}
-.square .box {
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-  border: 1px solid #000;
-  vertical-align: middle;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-.square .number {
-  vertical-align: middle;
+circle, rect {
+  cursor: pointer;
 }
     </style>
   </head>
   <body>
-    <div id="sidebar">
-      <h4>Variable</h4>
-      <select disabled>
-        <option value="none">None</option>
-        <option value="over_65">Pop. over 65 (%)</option>
-        <option value="english">Speak English "not well" / "not at all" (%)</option>
-        <!-- <option value="poverty">Poverty level (total)</option> -->
-        <option value="poverty_percent">Poverty level (%)</option>
-        <option value="poverty_seniors_percent">Seniors in poverty (%)</option>
-        <option value="poverty_kids">Kids and teens in poverty</option>
-        <option value="large_households">Large households (6+) (%)</option>
-        <option value="grandchildren">Grandparents caring for grandchildren</option>
-      </select>
-      <br/>
-      <div id="legend">
-        <div class="square">
-          <span class="box"></span>
-          <span class="number"></span>
-        </div>
-        <div class="square">
-          <span class="box"></span>
-          <span class="number"></span>
-        </div>
-        <div class="square">
-          <span class="box"></span>
-          <span class="number"></span>
-        </div>
-        <div class="square">
-          <span class="box"></span>
-          <span class="number"></span>
-        </div>
-        <div class="square">
-          <span class="box"></span>
-          <span class="number"></span>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Utilizing college dorms</h2>
+          <p>
+            We analyzed the capacity of hospitals and college dorms across Massachusetts
+            to house hospital staff and patients who do not have coronavirus, if the
+            hospitals reach capacity.
+          </p>
+          <div id="ma_map" class="map">
+            Loading map...
+          </div>
         </div>
       </div>
-      <br/>
-      <small>Data from ACS 5yr completed 2018</small>
+
+      <br/><br/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Who would benefit</h3>
+          <ul>
+            <li>Medical staff concerned about passing the virus on to their families or roommates</li>
+            <li>Non-coronavirus hospital patients</li>
+            <li>Non-contagious patients in recovery after coronavirus treatment</li>
+          </ul>
+        </div>
+      </div>
+
+      <br/><br/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Data Table</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>COLLEGE</th>
+                <th>CAMPUS</th>
+                <th>CITY</th>
+                <th>DORMCAP</th>
+                <th>staff_assigned</th>
+                <th>patients_assigned</th>
+                <th>utilization</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br/><br/>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Contact us</h3>
+          <p>
+            For updates and revisions to our data, please contact us:
+          </p>
+        </div>
+      </div>
     </div>
-    <h2>State Level</h2>
-    <div id="ma_map" class="map">
-      Loading...
-    </div>
-    <h2>Boston Metro</h2>
-    <div id="boston_map" class="map">
-      Loading...
-    </div>
-    <h2>Worcester</h2>
-    <div id="worcester_map" class="map">
-      Loading...
-    </div>
-    <h2>Springfield</h2>
-    <div id="springfield_map" class="map">
-      Loading...
-    </div>
+
     <script src="//d3js.org/d3.v5.min.js"></script>
     <script src="//d3js.org/d3-geo.v1.min.js"></script>
     <script src="//unpkg.com/topojson@3"></script>
-    <script src="./preview.js?v=2">
-    </script>
+    <script src="./home.js"></script>
   </body>
 </html>
