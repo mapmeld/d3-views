@@ -6,18 +6,25 @@ var map = new mapboxgl.Map({
   center: [-71.5, 42.12],
   zoom: 7,
 });
+var popup = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false
+});
 
 function hoverLayer(layer) {
-  map.on('mousemove', layer, function(e) {
-    if (e.features.length) {
-      console.log(e.features);
-    } else {
+  map.on('mouseenter', layer, function(e) {
+    map.getCanvas().style.cursor = 'pointer';
 
-    }
+    var name = e.features[0].properties.NAME || e.features[0].properties.COLLEGE;
+    popup
+      .setLngLat(e.features[0].geometry.coordinates)
+      .setHTML(name)
+      .addTo(map);
   });
 
   map.on('mouseleave', layer, function(e) {
-
+    map.getCanvas().style.cursor = '';
+    popup.remove();
   });
 }
 
