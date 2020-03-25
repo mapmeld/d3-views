@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>MGGG on Dorms and Hospital Beds</title>
+    <title>Modeling University Coronavirus Response | MGGG</title>
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet"/>
     <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <script src="//api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
@@ -33,10 +33,6 @@ body {
   padding: 20px;
   width: 100%;
 }
-p, ul, h1, h2 {
-  width: 60%;
-  margin-left: 20%;
-}
 h1 {
   font-size: 240%;
   line-height: 50%;
@@ -46,6 +42,10 @@ h2, h4 {
 }
 h3 {
   line-height: 0%;
+}
+p, ul, h1, h2 {
+  width: 70%;
+  margin-left: 15%;
 }
 @media (max-width: 1000px) {
   p, ul, h2, h3 {
@@ -57,10 +57,22 @@ h3 {
   border: 1px solid #ccc;
   height: 500px;
   max-height: 80vh;
-  width: 100%;
-  width: calc(100% - 60px);
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 70%;
+  /* width: calc(80% - 60px); */
+  margin-left: 15%;
+  /* margin-right: 10px; */
+}
+.box {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 70%;
+  margin-left: 15%;
+  /* width: 100%;
+  width: calc(100% - 80px); */
+  /* margin-left: 10px;
+  margin-right: 10px; */
 }
 p, li, td {
   text-align: left;
@@ -91,21 +103,18 @@ li.legend span {
 .bluetext {
   color: blue;
 }
-.box {
-  border: 1px solid #ccc;
-  border-bottom: none;
-  padding: 10px;
-  width: 100%;
-  width: calc(100% - 80px);
-  margin-left: 10px;
-  margin-right: 10px;
-}
+
 .box .italic {
   font-style: italic;
 }
 .table-container {
   width: 80%;
   margin-left: 10%;
+}
+th {
+  background: #000;
+  color: #fff;
+  font-weight: bold;
 }
 .btn {
   background-color: #4C50AF;
@@ -198,10 +207,10 @@ li.legend span {
             <tr>
               <th>College</th>
               <th>City</th>
-              <th>Dorms</th>
-              <th>staff_assigned</th>
-              <th>patients_assigned</th>
-              <th>utilization</th>
+              <th>Number of dorm beds</th>
+              <th>Hospital staff assigned by the model</th>
+              <th>Patients assigned by the model</th>
+              <th>Utilization (%)</th>
             </tr>
           </thead>
           <tbody>
@@ -210,6 +219,14 @@ li.legend span {
       </div>
 
       <br/><br/>
+
+      <h3>In the news</h3>
+      <ul>
+        <li>
+          Tufts President, Anthony P. Monaco, wrote an opinion piece in the Boston Globe:
+          <a href="https://www.bostonglobe.com/2020/03/18/opinion/higher-educations-role-fighting-covid-19/">Tufts is prepared to house patients during the coronavirus outbreak, other colleges and universities should too</a>
+        </li>
+      </ul>
 
       <!-- <h3>Contact us</h3>
       <p>
