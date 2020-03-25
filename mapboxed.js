@@ -58,8 +58,7 @@ map.on('load', function() {
       });
 
       colleges.features.forEach(function(college) {
-        var coordinates = ma_projection(college.geometry.coordinates),
-            row = d3.select('tbody').append('tr');
+        var row = d3.select('tbody').append('tr');
         ["COLLEGE", "CAMPUS", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
           row.append('td').text(isNaN(1 * (college.properties[column] + 1))
             ? college.properties[column]
