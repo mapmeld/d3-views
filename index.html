@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>MGGG on Dorms and Hospital Beds</title>
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
     <style>
 body {
   font-family: sans-serif;
@@ -14,6 +16,7 @@ body {
   border: 1px solid #ccc;
   height: 500px;
   width: 960px;
+  max-width: 100%;
 }
 .my_tooltip {
   position: relative;
@@ -95,9 +98,9 @@ circle, rect {
       </div>
     </div>
 
+    <!-- Fetch polyfill for old old browsers -->
+    <script src="./fetch.umd.js"></script>
     <script src="//d3js.org/d3.v5.min.js"></script>
-    <script src="//d3js.org/d3-geo.v1.min.js"></script>
-    <script src="//unpkg.com/topojson@3"></script>
-    <script src="./home.js"></script>
+    <script src="./mapboxed.js?v=2"></script>
   </body>
 </html>
