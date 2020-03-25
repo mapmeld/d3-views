@@ -90,13 +90,20 @@ map.on('load', function() {
             }
           })
 
-          var row = d3.select('tbody').append('tr');
+          var row = $('<tr>');
+          $('tbody').append(row);
+
           ["COLLEGE", "CAMPUS", "CITY", "DORMCAP", "staff_assigned", "patients_assigned", "utilization"].forEach(function (column) {
-            row.append('td').text(isNaN(1 * (college.properties[column] + 1))
-              ? college.properties[column]
-              : (1 * college.properties[column]).toLocaleString());
+            var cell = $('<td>');
+            if (college.properties[column]) {
+              cell.text(isNaN(1 * (college.properties[column]))
+                ? college.properties[column]
+                : (1 * college.properties[column]).toLocaleString());
+            }
+            row.append(cell);
           });
         });
+        $('.table').DataTable();
 
         map.addSource('colleges', {
           type: 'geojson',
@@ -124,7 +131,6 @@ map.on('load', function() {
             }
           })
         };
-        console.log(linkData);
         map.addSource('links', {
           type: 'geojson',
           data: linkData
