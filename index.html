@@ -12,23 +12,40 @@
     <style>
 html, body {
   width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
 }
 body {
   font-family: "Source Sans Pro", sans-serif;
-  padding: 20px;
   text-align: center;
   font-size: 120%;
   line-height: 150%;
 }
-h2, h3 {
-  font-weight: bold;
+.header {
+  background: #000;
+  width: 100%;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
 }
-p, ul {
+.container {
+  padding: 20px;
+  width: 100%;
+}
+p, ul, h1, h2 {
   width: 60%;
   margin-left: 20%;
 }
+h1 {
+  font-size: 240%;
+  line-height: 50%;
+}
+h2 {
+  font-weight: normal;
+}
 @media (max-width: 1000px) {
-  p, ul {
+  p, ul, h2, h3 {
     width: 80%;
     margin-left: 10%;
   }
@@ -39,8 +56,10 @@ p, ul {
   max-height: 80vh;
   width: 100%;
   width: calc(100% - 60px);
+  margin-left: 10px;
+  margin-right: 10px;
 }
-li, td {
+p, li, td {
   text-align: left;
 }
 .circle {
@@ -69,6 +88,8 @@ li.legend span {
   padding: 10px;
   width: 100%;
   width: calc(100% - 80px);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .box .italic {
   font-style: italic;
@@ -96,97 +117,90 @@ li.legend span {
     </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12">
-          <h2>Responding to Coronavirus</h2>
-          <h3>College campuses can help increase hospital capacity</h3>
+    <div class="header">
+      <h1>Coronavirus Pandemic Response</h1>
+      <h2>Vacant college campuses can provide much-needed support for hospitals in distress</h2>
+    </div>
+    <div class="container">
+      <p>
+        As the growing number of coronavirus cases continues to deplete limited hospital resources,
+        <strong>college campuses that have sent their students home are in a unique position
+          to provide additional beds and facilities to hospitals.</strong>
 
-          <p>
-            We analyzed the capacity of colleges across the United States
-            to house hospital staff and patients without coronavirus, if
-            hospitals reach capacity.
-          </p>
-          <p>
-            At Tufts University's MGGG Redistricting Lab, we used our expertise in geospatial
-            analysis to connect hospitals to nearby colleges.
-            We input the latest available data on college dorms and hospital beds.
-          </p>
+      </p>
+      <p>
+        At Tufts University's MGGG Redistricting Lab, we used our expertise in geospatial
+        analysis to connect hospitals to nearby college campuses.
+        We analyzed the ability of colleges across the United States to house hospital
+        staff and patients when hospitals reach capacity.
+      </p>
 
-          <br/>
+      <br/>
 
-          <div class="box">
-            <li class="legend">
-              <span class="circle red"></span>
-              <span>Hospitals</span>
-            </li>
-            <li class="legend">
-              <span class="circle blue"></span>
-              <span>Colleges</span>
-            </li>
-            <li class="legend italic">
-              <span class="circle"></span>
-              <span>size is proportional to number of beds</span>
-            </li>
-          </div>
+      <div class="box">
+        <li class="legend">
+          <span class="circle red"></span>
+          <span>Hospitals</span>
+        </li>
+        <li class="legend">
+          <span class="circle blue"></span>
+          <span>Colleges</span>
+        </li>
+        <li class="legend italic">
+          <span class="circle"></span>
+          <span>size is proportional to number of beds</span>
+        </li>
+      </div>
 
-          <div id="ma_map" class="map">
-            Loading map...
-            JavaScript must be enabled
-          </div>
-
-
-        </div>
+      <div id="ma_map" class="map">
+        Loading map...
+        JavaScript must be enabled
       </div>
 
       <br/><br/>
 
       <div class="row">
         <div class="col-sm-12">
-          <h3>Who would benefit</h3>
+          <h3>Who would benefit?</h3>
           <ul>
-            <li>Medical staff concerned about passing the virus on to their families or roommates</li>
-            <li>Non-coronavirus hospital patients</li>
-            <li>Non-contagious patients in recovery after coronavirus treatment</li>
+            <li>Medical staff concerned about passing the virus to their families or roommates</li>
+            <li>Community members concerned about virus containment measures in their area</li>
+            <li>Hospital patients without coronavirus</li>
+            <li>Hospital patients in recovery after coronavirus treatment</li>
           </ul>
         </div>
       </div>
 
       <br/><br/>
 
-      <div class="row">
-        <div class="col-sm-12 table-container">
-          <h3>Data Table</h3>
-          <table class="table display">
-            <thead>
-              <tr>
-                <th>College</th>
-                <th>Campus</th>
-                <th>City</th>
-                <th>Dorms</th>
-                <th>staff_assigned</th>
-                <th>patients_assigned</th>
-                <th>utilization</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <h3>Data Table</h3>
+        <table class="table display">
+          <thead>
+            <tr>
+              <th>College</th>
+              <th>Campus</th>
+              <th>City</th>
+              <th>Dorms</th>
+              <th>staff_assigned</th>
+              <th>patients_assigned</th>
+              <th>utilization</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
+
       <br/><br/>
 
-      <div class="row">
-        <div class="col-sm-12">
-          <h3>Contact us</h3>
-          <p>
-            For updates and revisions to our data, please contact us:
-            <br/>
-            <br/>
-            <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" class="btn">Contact Form</a>
-          </p>
-        </div>
-      </div>
+      <h3>Contact us</h3>
+      <p>
+        For updates and revisions to our data, please contact us:
+        <br/>
+        <br/>
+        <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" class="btn">Contact Form</a>
+      </p>
     </div>
 
     <!-- Fetch polyfill for old old browsers -->
