@@ -38,6 +38,7 @@ p, ul {
   height: 500px;
   max-height: 80vh;
   width: 100%;
+  width: calc(100% - 60px);
 }
 li, td {
   text-align: left;
@@ -65,7 +66,9 @@ li.legend span {
 .box {
   border: 1px solid #ccc;
   border-bottom: none;
-  padding: 10px
+  padding: 10px;
+  width: 100%;
+  width: calc(100% - 80px);
 }
 .box .italic {
   font-style: italic;
@@ -73,6 +76,19 @@ li.legend span {
 .table-container {
   width: 80%;
   margin-left: 10%;
+}
+.btn {
+  background-color: #4C50AF;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.btn:hover {
+  border: 2px solid #000;
 }
     </style>
   </head>
@@ -82,14 +98,14 @@ li.legend span {
         <div class="col-sm-12">
           <h2>Responding to Coronavirus</h2>
           <h3>College campuses can help increase hospital capacity</h3>
-          <br/>
+
           <p>
             We analyzed the capacity of colleges across the United States
             to house hospital staff and patients without coronavirus, if
             hospitals reach capacity.
           </p>
           <p>
-            At Tufts University's MGGG Redistricting Lab, we used our expertise in transport
+            At Tufts University's MGGG Redistricting Lab, we used our expertise in geospatial
             analysis to connect hospitals to nearby colleges.
             We input the latest available data on college dorms and hospital beds.
           </p>
@@ -110,9 +126,13 @@ li.legend span {
               <span>size is proportional to number of beds</span>
             </li>
           </div>
+
           <div id="ma_map" class="map">
             Loading map...
+            JavaScript must be enabled
           </div>
+
+
         </div>
       </div>
 
@@ -158,6 +178,9 @@ li.legend span {
           <h3>Contact us</h3>
           <p>
             For updates and revisions to our data, please contact us:
+            <br/>
+            <br/>
+            <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" class="btn">Contact Form</a>
           </p>
         </div>
       </div>
