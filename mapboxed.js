@@ -1,10 +1,37 @@
 mapboxgl.accessToken = "pk.eyJ1IjoiZGlzdHJpY3RyIiwiYSI6ImNqbjUzMTE5ZTBmcXgzcG81ZHBwMnFsOXYifQ.8HRRLKHEJA0AismGk2SX2g";;
 
+var select_state = (window.location.search.split("state=")[1] || "ma").substring(0, 2).toLowerCase();
+if (select_state !== "ma") {
+  $(".table-container").hide();
+}
+var state_configs = {
+  ma: {
+    center: [-71.5, 42.12],
+    zoom: 7,
+    links: "./ma_combined_results_20200325_v3.json",
+    hospitals: "./ma_hospitals.geojson?v=3",
+    colleges: "./ma_colleges.geojson?v=3"
+  },
+  ny: {
+    center: [-75, 43],
+    zoom: 5.5,
+    links: "./NY_combined_results_20200325_v1.json",
+    hospitals: "./ny_hospitals.geojson",
+    colleges: "./ny_colleges.geojson"
+  },
+  mi: {
+    center: [-85, 44.659],
+    zoom: 5.2,
+    links: "./MI_combined_results_20200325_v1.json",
+    hospitals: "./mi_hospitals.geojson",
+    colleges: "./mi_colleges.geojson?v=2"
+  }
+};
 var map = new mapboxgl.Map({
   container: 'ma_map',
   style: 'mapbox://styles/mapbox/light-v10',
-  center: [-71.5, 42.12],
-  zoom: 7,
+  center: state_configs[select_state].center,
+  zoom: state_configs[select_state].zoom,
 });
 var popup = new mapboxgl.Popup({
   closeButton: false,
@@ -47,10 +74,10 @@ map.on('load', function() {
   map.addControl(new mapboxgl.NavigationControl());
 
   // var index = 0;
-  fetch("./ma_combined_results_20200325_v3.json").then(function(res) { return res.json() }).then(function(links) {
+  fetch(state_configs[select_state].links).then(function(res) { return res.json() }).then(function(links) {
     // have links but want to add coordinates
 
-    fetch("./ma_hospitals.geojson?v=3").then(function(res) { return res.json() }).then(function(hospitals) {
+    fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
       hospitals.features.forEach(function (feature) {
         // feature.id = index;
         // index++;
@@ -83,8 +110,11 @@ map.on('load', function() {
         data: hospitals
       });
 
-      fetch("./ma_colleges.geojson?v=3").then(function(res) { return res.json() }).then(function(colleges) {
+      fetch(state_configs[select_state].colleges).then(function(res) { return res.json() }).then(function(colleges) {
         colleges.features = colleges.features.filter(function (college) {
+          if (select_state !== "ma") {
+            return true;
+          }
           if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
             return college.properties.CAMPUS === "Main Campus";
           }
@@ -104,7 +134,7 @@ map.on('load', function() {
           // index++;
 
           links.forEach(function (link, index) {
-            if (link.college === college.properties.COLLEGE) {
+            if (link.college === college.properties.COLLEGE || link.college === college.properties.NAME) {
               link.college = college.geometry.coordinates;
             }
           });
@@ -197,5 +227,10 @@ $(document).ready(function() {
       });
     });
     $('#colleges').DataTable();
+  });
+
+  $("#map_switch").val(select_state);
+  $("#map_switch").change(function(e) {
+    window.location = "./?state=" + e.target.value;
   });
 });

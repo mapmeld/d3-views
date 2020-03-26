@@ -127,3 +127,7 @@ td {
 .mapboxgl-popup {
   max-width: 400px;
 }
+#map_switch {
+  float: right;
+  padding: 6px;
+}
