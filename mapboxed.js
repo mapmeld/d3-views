@@ -72,6 +72,8 @@ function processMaps(select_state) {
   }
 
   map.on('load', function() {
+    map.setPaintProperty('admin-1-boundary', 'line-width', 3);
+    map.setPaintProperty('admin-1-boundary', 'line-color', '#777');
 
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
@@ -236,7 +238,7 @@ $(document).ready(function() {
   $("#ma_map .no-script").html("");
   if (select_state === "ma") {
     fetch("./ma_ed_inst_assignments_20200325_v4.csv").then(function(res) { return res.text() }).then(function (college_csv) {
-      college_csv.split("\n").slice(1).sort().forEach(function(r) {
+      college_csv.split("\n").slice(1).forEach(function(r) {
         var college = r.split(","),
             row = $('<tr>');
         if (!r.length) {
@@ -254,7 +256,9 @@ $(document).ready(function() {
           row.append(cell);
         });
       });
-      $('#colleges').DataTable();
+      $('#colleges').DataTable({
+        order: [[ 5, "desc" ]]
+      });
     });
   }
 });
