@@ -15,7 +15,7 @@ var state_configs = {
   },
   ny: {
     center: [-75, 43],
-    zoom: 5.5,
+    zoom: 5,
     links: "./NY_combined_results_20200325_v1.json",
     hospitals: "./ny_hospitals.geojson",
     colleges: "./ny_colleges.geojson",
@@ -23,7 +23,7 @@ var state_configs = {
   },
   mi: {
     center: [-85, 44.659],
-    zoom: 5.2,
+    zoom: 4.7,
     links: "./MI_combined_results_20200325_v1.json",
     hospitals: "./mi_hospitals.geojson",
     colleges: "./mi_colleges.geojson?v=2",
@@ -31,133 +31,80 @@ var state_configs = {
   }
 };
 
-$("#state_name_here").text(state_configs[select_state].name);
+// $("#state_name_here").text(state_configs[select_state].name);
 
-var map = new mapboxgl.Map({
-  container: 'ma_map',
-  style: 'mapbox://styles/mapbox/light-v10',
-  center: state_configs[select_state].center,
-  zoom: state_configs[select_state].zoom,
-});
-var popup = new mapboxgl.Popup({
-  closeButton: false,
-  closeOnClick: false
-});
-
-function toggleLines(e) {
-  map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
-}
-
-function hoverLayer(layer) {
-  map.on('mouseenter', layer, function(e) {
-    map.getCanvas().style.cursor = 'pointer';
-
-    var name = e.features[0].properties.NAME
-      || e.features[0].properties.FAC_NAME
-      || e.features[0].properties.COLLEGE;
-    popup
-      .setLngLat(e.features[0].geometry.coordinates)
-      .setHTML(name)
-      .addTo(map);
+function processMaps(select_state) {
+  var map = new mapboxgl.Map({
+    container: select_state + '_map',
+    style: 'mapbox://styles/mapbox/light-v10',
+    center: state_configs[select_state].center,
+    zoom: state_configs[select_state].zoom,
+  });
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
   });
 
-  map.on('mouseleave', layer, function(e) {
-    map.getCanvas().style.cursor = '';
-    popup.remove();
-  });
-}
+  function toggleLines(e) {
+    map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
+  }
 
-map.on('load', function() {
+  function hoverLayer(layer) {
+    map.on('mouseenter', layer, function(e) {
+      map.getCanvas().style.cursor = 'pointer';
 
-  var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    marker: {
-      color: 'orange'
-    },
-    mapboxgl: mapboxgl
-  });
-  map.addControl(geocoder);
-  map.addControl(new mapboxgl.NavigationControl());
+      var name = e.features[0].properties.NAME
+        || e.features[0].properties.FAC_NAME
+        || e.features[0].properties.COLLEGE;
+      popup
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(name)
+        .addTo(map);
+    });
 
-  // var index = 0;
-  fetch(state_configs[select_state].links).then(function(res) { return res.json() }).then(function(links) {
-    // have links but want to add coordinates
+    map.on('mouseleave', layer, function(e) {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
+  }
 
-    fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
-      hospitals.features.forEach(function (feature) {
-        // feature.id = index;
-        // index++;
+  map.on('load', function() {
 
-        feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
-        links.forEach(function (link, index) {
-          if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
-            link.hospital = feature.geometry.coordinates;
-          }
-        });
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      marker: {
+        color: 'orange'
+      },
+      mapboxgl: mapboxgl
+    });
+    map.addControl(geocoder);
+    map.addControl(new mapboxgl.NavigationControl());
 
-        var row = $('<tr>');
-        $('#hospitals tbody').append(row);
+    // var index = 0;
+    fetch(state_configs[select_state].links).then(function(res) { return res.json() }).then(function(links) {
+      // have links but want to add coordinates
 
-        if (feature.properties.BEDS < 0) {
-          feature.properties.BEDS = 0;
-        }
-
-        ["NAME", hospitals.features[0].properties.TOWN ? "TOWN" : "CITY", "BEDS"].forEach(function (column) {
-          var cell = $('<td>');
-          if (feature.properties[column]) {
-            cell.text(isNaN(1 * (feature.properties[column]))
-              ? feature.properties[column]
-              : (1 * feature.properties[column]).toLocaleString());
-          }
-          row.append(cell);
-        });
-
-      });
-      $('#hospitals').DataTable();
-
-      map.addSource('hospitals', {
-        type: 'geojson',
-        data: hospitals
-      });
-
-      fetch(state_configs[select_state].colleges).then(function(res) { return res.json() }).then(function(colleges) {
-        colleges.features = colleges.features.filter(function (college) {
-          if (select_state !== "ma") {
-            return true;
-          }
-          if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
-            return college.properties.CAMPUS === "Main Campus";
-          }
-          return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
-          "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
-          "Boston University", "Wentworth Institute of Technology",
-          "Northeastern University",
-          "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
-          "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
-          "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
-          "Amherst College", "Lesley University", "Endicott College", "Gordon College", "Merrimack College", "Williams College"
-          ].includes(college.properties.COLLEGE.trim())
-        });
-
-        colleges.features.forEach(function(feature) {
+      fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
+        hospitals.features.forEach(function (feature) {
           // feature.id = index;
           // index++;
-          feature.properties.NAME = feature.properties.NAME || feature.properties.COLLEGE;
 
+          feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
           links.forEach(function (link, index) {
-            if (link.college === feature.properties.NAME) {
-              link.college = feature.geometry.coordinates;
+            if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
+              link.hospital = feature.geometry.coordinates;
             }
           });
 
-          if (select_state !== "ma") {
-            if (feature.properties.CAMPUS) {
-              feature.properties.NAME += "  (" + feature.properties.CAMPUS + ")";
+          if (select_state === "ma") {
+            var row = $('<tr>');
+            $('#hospitals tbody').append(row);
+
+            if (feature.properties.BEDS < 0) {
+              feature.properties.BEDS = 0;
             }
 
-            var row = $('<tr>');
-            $('#colleges tbody').append(row);
-            ["NAME", "CITY", "DORM_CAP", "staff", "patients", "util"].forEach(function (column) {
+            ["NAME", hospitals.features[0].properties.TOWN ? "TOWN" : "CITY", "BEDS"].forEach(function (column) {
               var cell = $('<td>');
               if (feature.properties[column]) {
                 cell.text(isNaN(1 * (feature.properties[column]))
@@ -167,73 +114,135 @@ map.on('load', function() {
               row.append(cell);
             });
           }
-        });
 
-        if (select_state !== "ma") {
-          $('#colleges').DataTable();
+        });
+        if (select_state === "ma") {
+          $('#hospitals').DataTable();
         }
 
-        map.addSource('colleges', {
+        map.addSource('hospitals', {
           type: 'geojson',
-          data: colleges
+          data: hospitals
         });
 
-        var linkData = {
-          type: "FeatureCollection",
-          features: links.map(function (link) {
-            return {
-              type: "Feature",
-              geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
-              properties: {weight:link.weight}
+        fetch(state_configs[select_state].colleges).then(function(res) { return res.json() }).then(function(colleges) {
+          colleges.features = colleges.features.filter(function (college) {
+            if (select_state !== "ma") {
+              return true;
             }
-          })
-        };
+            if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
+              return college.properties.CAMPUS === "Main Campus";
+            }
+            return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
+            "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
+            "Boston University", "Wentworth Institute of Technology",
+            "Northeastern University",
+            "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
+            "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
+            "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
+            "Amherst College", "Lesley University", "Endicott College", "Gordon College", "Merrimack College", "Williams College"
+            ].includes(college.properties.COLLEGE.trim())
+          });
 
-        // console.log(linkData.features.filter(function(f) {
-        //   return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
-        // }));
+          colleges.features.forEach(function(feature) {
+            // feature.id = index;
+            // index++;
+            feature.properties.NAME = feature.properties.NAME || feature.properties.COLLEGE;
 
-        map.addSource('links', {
-          type: 'geojson',
-          data: linkData
-        });
-        map.addLayer({
-          id: 'links',
-          type: 'line',
-          source: 'links',
-          paint: {
-            'line-color': '#000',
-            'line-width': ["*", ["get", "weight"], 0.015]
+            links.forEach(function (link, index) {
+              if (link.college === feature.properties.NAME) {
+                link.college = feature.geometry.coordinates;
+              }
+            });
+
+            // if (select_state !== "ma") {
+            //   if (feature.properties.CAMPUS) {
+            //     feature.properties.NAME += "  (" + feature.properties.CAMPUS + ")";
+            //   }
+            //
+            //   var row = $('<tr>');
+            //   $('#colleges tbody').append(row);
+            //   ["NAME", "CITY", "DORM_CAP", "staff", "patients", "util"].forEach(function (column) {
+            //     var cell = $('<td>');
+            //     if (feature.properties[column]) {
+            //       cell.text(isNaN(1 * (feature.properties[column]))
+            //         ? feature.properties[column]
+            //         : (1 * feature.properties[column]).toLocaleString());
+            //     }
+            //     row.append(cell);
+            //   });
+            // }
+          });
+
+          if (select_state !== "ma") {
+            $('#colleges').DataTable();
           }
-        });
 
-        map.addLayer({
-          id: 'hospitals',
-          type: 'circle',
-          source: 'hospitals',
-          paint: {
-            'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
-            'circle-color': 'rgb(255, 50, 50)',
-            'circle-opacity': 0.9
-          }
-        });
-        hoverLayer('hospitals');
+          map.addSource('colleges', {
+            type: 'geojson',
+            data: colleges
+          });
 
-        map.addLayer({
-          id: 'colleges',
-          type: 'circle',
-          source: 'colleges',
-          paint: {
-            'circle-radius': ["*", ["sqrt", ["get", "DORM_CAP"]], 0.3],
-            'circle-color': '#00f',
-            'circle-opacity': 0.4
-          }
+          var linkData = {
+            type: "FeatureCollection",
+            features: links.map(function (link) {
+              return {
+                type: "Feature",
+                geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
+                properties: {weight:link.weight}
+              }
+            })
+          };
+
+          // console.log(linkData.features.filter(function(f) {
+          //   return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
+          // }));
+
+          map.addSource('links', {
+            type: 'geojson',
+            data: linkData
+          });
+          map.addLayer({
+            id: 'links',
+            type: 'line',
+            source: 'links',
+            paint: {
+              'line-color': '#000',
+              'line-width': ["*", ["get", "weight"], 0.015]
+            }
+          });
+
+          map.addLayer({
+            id: 'hospitals',
+            type: 'circle',
+            source: 'hospitals',
+            paint: {
+              'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
+              'circle-color': 'rgb(255, 50, 50)',
+              'circle-opacity': 0.9
+            }
+          });
+          hoverLayer('hospitals');
+
+          map.addLayer({
+            id: 'colleges',
+            type: 'circle',
+            source: 'colleges',
+            paint: {
+              'circle-radius': ["*", ["sqrt", ["get", "DORM_CAP"]], 0.3],
+              'circle-color': '#00f',
+              'circle-opacity': 0.4
+            }
+          });
+          hoverLayer('colleges');
         });
-        hoverLayer('colleges');
       });
     });
   });
-});
+}
+processMaps("ma");
+processMaps("mi");
+processMaps("ny");
 
 // CSV stuff
 $(document).ready(function() {

@@ -134,3 +134,16 @@ td {
   vertical-align: middle;
   font-size: 10pt;
 }
+
+#mi_half, #ny_half {
+  width: 45%;
+  display: inline-block;
+}
+
+#mi_map, #ny_map {
+  width: 100%;
+  display: block;
+  border: 1px solid #ccc;
+  height: 400px;
+  max-height: 50vh;
+}
