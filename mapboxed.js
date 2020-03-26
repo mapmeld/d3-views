@@ -14,7 +14,7 @@ var state_configs = {
     name: "Massachusetts"
   },
   ny: {
-    center: [-75, 43],
+    center: [-75.6, 43],
     zoom: 5,
     links: "./NY_combined_results_20200325_v1.json",
     hospitals: "./ny_hospitals.geojson",
@@ -275,9 +275,4 @@ $(document).ready(function() {
       $('#colleges').DataTable();
     });
   }
-
-  $("#map_switch").val(select_state);
-  $("#map_switch").change(function(e) {
-    window.location = "./?state=" + e.target.value;
-  });
 });
