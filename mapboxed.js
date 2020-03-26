@@ -90,6 +90,10 @@ function processMaps(select_state) {
       // have links but want to add coordinates
 
       fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
+       hospitals.features = hospitals.features.filter(feature => feature.properties.BEDS >= 10);
+       // console.log(hospitals.features.filter(feature => feature.properties.BEDS >= 10));
+
+
         hospitals.features.forEach(function (feature) {
           // feature.id = index;
           // index++;
