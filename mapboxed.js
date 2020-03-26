@@ -8,7 +8,7 @@ var state_configs = {
   ma: {
     center: [-71.5, 42.12],
     zoom: 7,
-    links: "./ma_combined_results_20200325_v3.json",
+    links: "./ma_combined_results_20200325_v4.json",
     hospitals: "./ma_hospitals.geojson?v=4",
     colleges: "./ma_colleges.geojson?v=4",
     name: "Massachusetts"
@@ -136,7 +136,13 @@ function processMaps(select_state) {
             return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
             "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
             "Boston University", "Wentworth Institute of Technology",
-            "Northeastern University",
+            "Northeastern University", "Framingham State University", "Harvard College", "Worcester State University",
+            "Eastern Nazarene College", "American International College", "Westfield State University",
+            "Bridgewater State University", "University of Massachusetts Dartmouth", "Massachusetts Maritime Academy",
+            "University of Massachusetts Dartmouth Center for Innovation and Entrepreneurship",
+            "Northpoint Bible College", "University of Massachusetts Lowell", "Fitchburg State University",
+            "Salem State University", "Lasell College", "Massachusetts College of Pharmacy and Health Science",
+            "Simmons College", "Regis College", "Nichols College", "Dean College", "Becker College",
             "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
             "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
             "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
@@ -194,9 +200,9 @@ function processMaps(select_state) {
             })
           };
 
-          // console.log(linkData.features.filter(function(f) {
-          //   return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
-          // }));
+          console.log(linkData.features.filter(function(f) {
+            return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
+          }));
 
           map.addSource('links', {
             type: 'geojson',
@@ -247,7 +253,7 @@ processMaps("ny");
 // CSV stuff
 $(document).ready(function() {
   if (select_state === "ma") {
-    fetch("./ma_ed_inst_assignments_20200325_v3.csv").then(function(res) { return res.text() }).then(function (college_csv) {
+    fetch("./ma_ed_inst_assignments_20200325_v4.csv").then(function(res) { return res.text() }).then(function (college_csv) {
       college_csv.split("\n").slice(1).sort().forEach(function(r) {
         var college = r.split(","),
             row = $('<tr>');
