@@ -2,15 +2,15 @@ mapboxgl.accessToken = "pk.eyJ1IjoiZGlzdHJpY3RyIiwiYSI6ImNqbjUzMTE5ZTBmcXgzcG81Z
 
 var select_state = (window.location.search.split("state=")[1] || "ma").substring(0, 2).toLowerCase();
 if (select_state !== "ma") {
-  $(".table-container").hide();
+  // $(".table-container").hide();
 }
 var state_configs = {
   ma: {
     center: [-71.5, 42.12],
     zoom: 7,
     links: "./ma_combined_results_20200325_v3.json",
-    hospitals: "./ma_hospitals.geojson?v=3",
-    colleges: "./ma_colleges.geojson?v=3"
+    hospitals: "./ma_hospitals.geojson?v=4",
+    colleges: "./ma_colleges.geojson?v=4"
   },
   ny: {
     center: [-75, 43],
@@ -92,7 +92,11 @@ map.on('load', function() {
         var row = $('<tr>');
         $('#hospitals tbody').append(row);
 
-        ["NAME", "TOWN", "BEDCOUNT"].forEach(function (column) {
+        if (feature.properties.BEDS < 0) {
+          feature.properties.BEDS = 0;
+        }
+
+        ["NAME", hospitals.features[0].properties.TOWN ? "TOWN" : "CITY", "BEDS"].forEach(function (column) {
           var cell = $('<td>');
           if (feature.properties[column]) {
             cell.text(isNaN(1 * (feature.properties[column]))
@@ -129,19 +133,39 @@ map.on('load', function() {
           ].includes(college.properties.COLLEGE.trim())
         });
 
-        colleges.features.forEach(function(college) {
-          // college.id = index;
+        colleges.features.forEach(function(feature) {
+          // feature.id = index;
           // index++;
+          feature.properties.NAME = feature.properties.NAME || feature.properties.COLLEGE;
 
           links.forEach(function (link, index) {
-            if (link.college === college.properties.COLLEGE || link.college === college.properties.NAME) {
-              link.college = college.geometry.coordinates;
+            if (link.college === feature.properties.NAME) {
+              link.college = feature.geometry.coordinates;
             }
           });
-          if (college.properties.CAMPUS) {
-            college.properties.COLLEGE += "  (" + college.properties.CAMPUS + ")";
+
+          if (select_state !== "ma") {
+            if (feature.properties.CAMPUS) {
+              feature.properties.NAME += "  (" + feature.properties.CAMPUS + ")";
+            }
+
+            var row = $('<tr>');
+            $('#colleges tbody').append(row);
+            ["NAME", "CITY", "DORM_CAP", "staff", "patients", "util"].forEach(function (column) {
+              var cell = $('<td>');
+              if (feature.properties[column]) {
+                cell.text(isNaN(1 * (feature.properties[column]))
+                  ? feature.properties[column]
+                  : (1 * feature.properties[column]).toLocaleString());
+              }
+              row.append(cell);
+            });
           }
         });
+
+        if (select_state !== "ma") {
+          $('#colleges').DataTable();
+        }
 
         map.addSource('colleges', {
           type: 'geojson',
@@ -182,7 +206,7 @@ map.on('load', function() {
           type: 'circle',
           source: 'hospitals',
           paint: {
-            'circle-radius': ["*", ["sqrt", ["get", "BEDCOUNT"]], 0.3],
+            'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
             'circle-color': 'rgb(255, 50, 50)',
             'circle-opacity': 0.9
           }
@@ -194,7 +218,7 @@ map.on('load', function() {
           type: 'circle',
           source: 'colleges',
           paint: {
-            'circle-radius': ["*", ["sqrt", ["get", "DORMCAP"]], 0.3],
+            'circle-radius': ["*", ["sqrt", ["get", "DORM_CAP"]], 0.3],
             'circle-color': '#00f',
             'circle-opacity': 0.4
           }
@@ -207,27 +231,29 @@ map.on('load', function() {
 
 // CSV stuff
 $(document).ready(function() {
-  fetch("./ma_ed_inst_assignments_20200325_v3.csv").then(function(res) { return res.text() }).then(function (college_csv) {
-    college_csv.split("\n").slice(1).sort().forEach(function(r) {
-      var college = r.split(","),
-          row = $('<tr>');
-      if (!r.length) {
-        return;
-      }
-      $('#colleges tbody').append(row);
-
-      college.forEach(function (column) {
-        var cell = $('<td>');
-        if (column) {
-          cell.text(isNaN(1 * column)
-            ? column
-            : (1 * column).toLocaleString());
+  if (select_state === "ma") {
+    fetch("./ma_ed_inst_assignments_20200325_v3.csv").then(function(res) { return res.text() }).then(function (college_csv) {
+      college_csv.split("\n").slice(1).sort().forEach(function(r) {
+        var college = r.split(","),
+            row = $('<tr>');
+        if (!r.length) {
+          return;
         }
-        row.append(cell);
+        $('#colleges tbody').append(row);
+
+        college.forEach(function (column) {
+          var cell = $('<td>');
+          if (column) {
+            cell.text(isNaN(1 * column)
+              ? column
+              : (1 * column).toLocaleString());
+          }
+          row.append(cell);
+        });
       });
+      $('#colleges').DataTable();
     });
-    $('#colleges').DataTable();
-  });
+  }
 
   $("#map_switch").val(select_state);
   $("#map_switch").change(function(e) {
