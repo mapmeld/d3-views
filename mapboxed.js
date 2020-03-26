@@ -163,29 +163,7 @@ function processMaps(select_state) {
                 link.college = feature.geometry.coordinates;
               }
             });
-
-            // if (select_state !== "ma") {
-            //   if (feature.properties.CAMPUS) {
-            //     feature.properties.NAME += "  (" + feature.properties.CAMPUS + ")";
-            //   }
-            //
-            //   var row = $('<tr>');
-            //   $('#colleges tbody').append(row);
-            //   ["NAME", "CITY", "DORM_CAP", "staff", "patients", "util"].forEach(function (column) {
-            //     var cell = $('<td>');
-            //     if (feature.properties[column]) {
-            //       cell.text(isNaN(1 * (feature.properties[column]))
-            //         ? feature.properties[column]
-            //         : (1 * feature.properties[column]).toLocaleString());
-            //     }
-            //     row.append(cell);
-            //   });
-            // }
           });
-
-          if (select_state !== "ma") {
-            $('#colleges').DataTable();
-          }
 
           map.addSource('colleges', {
             type: 'geojson',
