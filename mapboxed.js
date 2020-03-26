@@ -10,23 +10,29 @@ var state_configs = {
     zoom: 7,
     links: "./ma_combined_results_20200325_v3.json",
     hospitals: "./ma_hospitals.geojson?v=4",
-    colleges: "./ma_colleges.geojson?v=4"
+    colleges: "./ma_colleges.geojson?v=4",
+    name: "Massachusetts"
   },
   ny: {
     center: [-75, 43],
     zoom: 5.5,
     links: "./NY_combined_results_20200325_v1.json",
     hospitals: "./ny_hospitals.geojson",
-    colleges: "./ny_colleges.geojson"
+    colleges: "./ny_colleges.geojson",
+    name: "New York"
   },
   mi: {
     center: [-85, 44.659],
     zoom: 5.2,
     links: "./MI_combined_results_20200325_v1.json",
     hospitals: "./mi_hospitals.geojson",
-    colleges: "./mi_colleges.geojson?v=2"
+    colleges: "./mi_colleges.geojson?v=2",
+    name: "Michigan"
   }
 };
+
+$("#state_name_here").text(state_configs[select_state].name);
+
 var map = new mapboxgl.Map({
   container: 'ma_map',
   style: 'mapbox://styles/mapbox/light-v10',

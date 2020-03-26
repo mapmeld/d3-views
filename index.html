@@ -13,27 +13,30 @@
   </head>
   <body>
     <div class="header">
-      <h1>Coronavirus Pandemic Response</h1>
-      <h2>College campuses can provide much-needed support for hospitals in distress</h2>
+      <h1>Coronavirus Response Alliance</h1>
+      <h2>College campuses can provide much-needed support for strained hospitals</h2>
     </div>
     <div class="container">
       <p>
-        As the growing number of coronavirus cases continues to deplete limited hospital resources,
-        <strong>college campuses that have sent their students home are in a unique position
-          to provide additional beds and facilities to hospitals.</strong>
+        As the growing number of coronavirus cases continues to strain limited hospital resources,
+        <strong>college campuses with largely vacated dormitories are in a unique position to
+          provide additional beds and facilities to hospitals</strong>.
 
+        Dorms can be repurposed as alternative hospital sites to house recovering patients
+        and offer temporary lodging to medical personnel, coordinated through health care providers.
       </p>
       <p>
-        At Tufts University's MGGG Redistricting Lab, we used our expertise in geospatial
-        analysis to connect <span class="redtext">hospitals</span> to nearby
+        At the MGGG Redistricting Lab, we usually study gerrymandering.  But with the same geodata
+        and math modeling skills, we can build a simple model that connects
+        <span class="redtext">hospitals</span> to nearby
         <span class="bluetext">college campuses</span>.
-        We analyzed the ability of colleges across the United States to house hospital
-        staff and patients when hospitals reach capacity.
+        <br/>
+        Let’s take a look at <span id="state_name_here">Massachusetts</span>.
       </p>
 
       <br/>
 
-      <h3>Where are the beds?</h3>
+      <h3>Mapping hospital–university flows</h3>
       <!-- <h4>Number of hospital and dorm beds</h4> -->
 
       <div class="box">
@@ -79,20 +82,36 @@
 
       <div class="row">
         <div class="col-sm-12">
-          <h3>Who would benefit?</h3>
+          <h3>What are you seeing in these maps?</h3>
+          <p>
+            Our model flows people from hospitals to universities in a way that respects
+            bed capacity and minimizes travel time.  Here are the separate populations
+            that are transferred from hospitals to colleges:
+          </p>
           <ul>
-            <li>Medical staff concerned about passing the virus to their families or roommates</li>
-            <li>Community members concerned about virus containment measures in their area</li>
-            <li>Hospital patients without coronavirus</li>
-            <li>Hospital patients in recovery after coronavirus treatment</li>
+            <li>Hospital patients with non-COVID conditions</li>
+            <li>Hospital patients recovering from COVID</li>
+            <li>Medical personnel who need a place to sleep without exposing their families and home communities to risk</li>
           </ul>
+          <p>
+            By freeing beds, this alliance allows hospitals to convert more beds to critical
+            care and provides support for front-line medical workers.
+          </p>
+
+          <h3>Model Assumptions</h3>
+          <p>
+            See <a href="https://github.com/mggg/d3-views">our GitHub repo</a> for model structure and parameters.
+            This is a proof of principle model intended to illustrate the qualitative
+            point that available dorm capacity is large enough to have a large impact
+            as the nation mobilizes infrastructure for COVID-19 treatment.
+          </p>
         </div>
       </div>
 
       <br/><br/>
 
       <div class="table-container">
-        <h3>Data Tables</h3>
+        <h2>Data Tables</h2>
         <table id="colleges" class="table display">
           <thead>
             <tr>
@@ -124,6 +143,19 @@
 
       <br/><br/>
 
+      <h2>Other states (beta)</h2>
+      <a class="btn" href="/?state=mi">Michigan</a>
+      <a class="btn" href="/?state=ny">New York</a>
+      <br/>
+      <br/>
+      <em>
+        caveat: model assumptions should be adapted with parameters fitted to the
+        university and hospital data of each state.
+      </em>
+
+      <br/>
+      <br/>
+      <br/>
       <h3>In the news</h3>
       <ul>
         <li>
@@ -131,6 +163,19 @@
           <a href="https://www.bostonglobe.com/2020/03/18/opinion/higher-educations-role-fighting-covid-19/">Tufts is prepared to house patients during the coronavirus outbreak, other colleges and universities should too</a>
         </li>
       </ul>
+
+      <br/>
+      <br/>
+      <h3>About us</h3>
+      <p>
+        <a href="https://mggg.org">MGGG Redistricting Lab</a>
+        is a research team of the <a href="https://tischcollege.tufts.edu/">Tisch College of Civic Life</a>
+         at <a href="https://tufts.edu">Tufts University</a>.
+         We are grateful for the major support of the National Science Foundation through the Convergence Accelerator award OIA-1937095, Network Science of Census Data.
+      </p>
+      <p>
+        This project is a team effort of the MGGG Redistricting Lab with major cooperation from Parker Rule and Olivia Walch.
+      </p>
 
       <!-- <h3>Contact us</h3>
       <p>
@@ -146,6 +191,6 @@
     <script src="//code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
-    <script src="./mapboxed.js?v=2"></script>
+    <script src="./mapboxed.js?v=3"></script>
   </body>
 </html>
