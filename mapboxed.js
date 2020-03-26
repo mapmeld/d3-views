@@ -207,7 +207,7 @@ function processMaps(select_state) {
             source: 'hospitals',
             paint: {
               'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
-              'circle-color': 'rgb(255, 50, 50)',
+              'circle-color': 'rgb(255, 79, 73)',
               'circle-opacity': 0.9
             }
           });
@@ -219,7 +219,7 @@ function processMaps(select_state) {
             source: 'colleges',
             paint: {
               'circle-radius': ["*", ["sqrt", ["get", "DORM_CAP"]], 0.3],
-              'circle-color': '#00f',
+              'circle-color': '#006b9c',
               'circle-opacity': 0.4
             }
           });
