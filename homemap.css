@@ -5,7 +5,7 @@ html, body {
   box-sizing: content-box;
 }
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Lora", Georgia, serif; //"Source Sans Pro", sans-serif;
   text-align: center;
   font-size: 120%;
   line-height: 150%;
@@ -79,17 +79,21 @@ li.legend {
 li.legend span {
   vertical-align: middle;
 }
+
+a {
+  color: #006b9c;
+}
 .red {
-  background-color: red;
+  background-color: #ff4f49;
 }
 .redtext {
-  color: red;
+  color: #ff4f49;
 }
 .blue {
-  background-color: blue;
+  background-color: #0099cd;
 }
 .bluetext {
-  color: blue;
+  color: #0099cd;
 }
 
 .box .italic {

@@ -55,7 +55,7 @@ function processMaps(select_state) {
         source: 'hospitals',
         paint: {
           'circle-radius': 5, //["*", ["sqrt", ["get", "BEDS"]], 0.3],
-          'circle-color': 'rgb(255, 50, 50)',
+          'circle-color': 'rgb(255, 79, 73)',
           'circle-opacity': 0.9
         }
       });

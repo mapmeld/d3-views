@@ -52,7 +52,7 @@ fetch("./ma_state.topojson").then(res => res.json()).then((state) => {
         .attr('y', coordinates[1] - size/2)
         .attr('width', size)
         .attr('height', size)
-        .style('fill', 'rgba(255, 50, 50, 0.9)')
+        .style('fill', 'rgba(255, 79, 73, 0.9)')
         .on('mouseover', (e) => {
           tooltip(hospital.properties.NAME, false);
         })
@@ -88,7 +88,7 @@ fetch("./ma_state.topojson").then(res => res.json()).then((state) => {
             .attr('cx', coordinates[0])
             .attr('cy', coordinates[1])
             .attr('r', Math.sqrt(college.properties.DORMCAP * 1) * 0.2)
-            .style('fill', 'rgba(0, 0, 255, 0.4)')
+            .style('fill', 'rgba(0, 153, 205, 0.4)')
             .on('mouseover', (e) => {
                 tooltip(college.properties.COLLEGE);
             })
