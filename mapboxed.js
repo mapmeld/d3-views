@@ -1,9 +1,8 @@
 mapboxgl.accessToken = "pk.eyJ1IjoiZGlzdHJpY3RyIiwiYSI6ImNqbjUzMTE5ZTBmcXgzcG81ZHBwMnFsOXYifQ.8HRRLKHEJA0AismGk2SX2g";;
 
-var select_state = (window.location.search.split("state=")[1] || "ma").substring(0, 2).toLowerCase();
-if (select_state !== "ma") {
-  // $(".table-container").hide();
-}
+var main_map = null;
+var select_state = "ma";
+
 var state_configs = {
   ma: {
     center: [-71.5, 42.12],
@@ -33,6 +32,10 @@ var state_configs = {
 
 // $("#state_name_here").text(state_configs[select_state].name);
 
+function toggleLines(e) {
+  main_map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
+}
+
 function processMaps(select_state) {
   var map = new mapboxgl.Map({
     container: select_state + '_map',
@@ -40,15 +43,14 @@ function processMaps(select_state) {
     center: state_configs[select_state].center,
     zoom: state_configs[select_state].zoom,
   });
+  if (select_state === "ma") {
+    main_map = map;
+  }
   var popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
     offset: 10
   });
-
-  function toggleLines(e) {
-    map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
-  }
 
   function hoverLayer(layer) {
     map.on('mouseenter', layer, function(e) {
