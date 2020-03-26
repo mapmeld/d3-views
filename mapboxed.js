@@ -42,7 +42,8 @@ function processMaps(select_state) {
   });
   var popup = new mapboxgl.Popup({
     closeButton: false,
-    closeOnClick: false
+    closeOnClick: false,
+    offset: 10
   });
 
   function toggleLines(e) {
@@ -252,6 +253,7 @@ processMaps("ny");
 
 // CSV stuff
 $(document).ready(function() {
+  $("#ma_map .no-script").html("");
   if (select_state === "ma") {
     fetch("./ma_ed_inst_assignments_20200325_v4.csv").then(function(res) { return res.text() }).then(function (college_csv) {
       college_csv.split("\n").slice(1).sort().forEach(function(r) {
