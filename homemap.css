@@ -172,3 +172,17 @@ td {
   height: 400px;
   max-height: 50vh;
 }
+
+.dataTables_info {
+  display: none;
+}
+
+
+.dataTables_scrollBody::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, .5);
+}

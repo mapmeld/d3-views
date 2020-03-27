@@ -169,7 +169,11 @@ function processMaps(select_state) {
 
         });
         if (select_state === "ma") {
-          $('#hospitals').DataTable();
+          $('#hospitals').DataTable({
+            scrollY:        "400px",
+            scrollCollapse: true,
+            paging:         false
+          });
         }
 
         map.addSource('hospitals', {
@@ -271,7 +275,7 @@ function load_MA_CSV() {
       $('#colleges').DataTable().destroy();
       $("#colleges tbody").html("");
     }
-    
+
     college_csv.split("\n").slice(1).forEach(function(r) {
       var college = r.split(","),
           row = $('<tr>');
@@ -293,6 +297,9 @@ function load_MA_CSV() {
 
     alreadyMadeTable = true;
     $('#colleges').DataTable({
+      scrollY:        "400px",
+      scrollCollapse: true,
+      paging:         false,
       order: [[ 5, "desc" ]]
     });
   });
@@ -342,6 +349,9 @@ $(document).ready(function() {
 
     });
     $('#nation').DataTable({
+      scrollY:        "400px",
+      scrollCollapse: true,
+      paging:         false,
         order: [[ 3, "desc" ]]
       });
   });
