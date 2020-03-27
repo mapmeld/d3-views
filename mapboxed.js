@@ -266,3 +266,52 @@ $(document).ready(function() {
     });
   }
 });
+
+
+$(document).ready(function() {
+  fetch("state_total_dorms_vs_beds.json").then(response => response.json()).then(function (states) {
+    console.log(states)
+
+    states.forEach(function (state) {
+      var row = $('<tr>');
+      $('#nation tbody').append(row);
+
+      ["STATE", "CIRCLE", "DORM_CAP", "BEDS"].forEach(function (column) {
+        var cell = $('<td>');
+        if (column === "CIRCLE") {
+          const h = 100;
+          if (state["DORM_CAP"] > state["BEDS"]) {
+            var scale = Math.sqrt(state["DORM_CAP"] / state["BEDS"]);
+
+            cell.html(`<svg height="80" width="80">
+              <circle cx="40" cy="40" r="40" fill="#0099cd" />
+              <circle cx="40" cy="40" r="${40/scale}" fill="#ff4f49" />
+               </svg>`);
+          } else {
+            var scale = Math.sqrt(state["BEDS"] / state["DORM_CAP"]);
+
+            cell.html(`<svg height="80" width="80">
+              <circle cx="40" cy="40" r="40" fill="#ff4f49" />
+              <circle cx="40" cy="40" r="${40/scale}" fill="#0099cd" />
+               </svg>`);
+          }
+
+          
+        }
+        else {
+          if (state[column]) {
+          cell.text(isNaN(1 * (state[column]))
+            ? state[column]
+            : (1 * state[column]).toLocaleString());
+          }
+        }
+        
+        row.append(cell);
+        });
+      
+    });
+    $('#nation').DataTable({
+        order: [[ 4, "desc" ]]
+      });
+  });
+});
