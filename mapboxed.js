@@ -8,14 +8,14 @@ var state_configs = {
     center: [-71.5, 42.12],
     zoom: 7,
     links: {
-      "40": "./ma_combined_results_20200327_v3.json",
-      "60": "./ma_combined_results_20200327_v1.json",
-      "80": "./ma_combined_results_20200327_v2.json"
+      "40": "./ma_combined_results_20200327_40_util_euclidean.json",
+      "60": "./ma_combined_results_20200327_60_util_euclidean.json",
+      "80": "./ma_combined_results_20200327_80_util_euclidean.json"
     },
     csvs: {
-      "40": "./ma_ed_inst_assignments_20200327_v3.csv",
-      "60": "./ma_ed_inst_assignments_20200327_v1.csv",
-      "80": "./ma_ed_inst_assignments_20200327_v2.csv"
+      "40": "./ma_ed_inst_assignments_20200327_40_util_euclidean.csv",
+      "60": "./ma_ed_inst_assignments_20200327_60_util_euclidean.csv",
+      "80": "./ma_ed_inst_assignments_20200327_80_util_euclidean.csv"
     },
     hospitals: "./ma_hospitals.geojson?v=4",
     colleges: "./ma_colleges.geojson?v=4",

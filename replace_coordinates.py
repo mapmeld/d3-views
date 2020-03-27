@@ -3,9 +3,9 @@ import json
 state_configs = {
   'ma': {
     'links': [
-        "./ma_combined_results_20200327_v1.json",
-        "./ma_combined_results_20200327_v2.json",
-        "./ma_combined_results_20200327_v3.json",
+        "./ma_combined_results_20200327_40_util_euclidean.json",
+        "./ma_combined_results_20200327_60_util_euclidean.json",
+        "./ma_combined_results_20200327_80_util_euclidean.json",
     ],
     'hospitals': "./ma_hospitals.geojson",
     'colleges': "./ma_colleges.geojson",
