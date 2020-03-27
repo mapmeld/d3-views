@@ -43,6 +43,7 @@ function processMaps(select_state) {
     center: state_configs[select_state].center,
     zoom: state_configs[select_state].zoom,
   });
+
   if (select_state === "ma") {
     main_map = map;
   }
@@ -72,9 +73,6 @@ function processMaps(select_state) {
   }
 
   map.on('load', function() {
-    map.setPaintProperty('admin-1-boundary', 'line-width', 3);
-    map.setPaintProperty('admin-1-boundary', 'line-color', '#777');
-
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       marker: {
@@ -84,6 +82,21 @@ function processMaps(select_state) {
     });
     map.addControl(geocoder);
     map.addControl(new mapboxgl.NavigationControl());
+
+    map.addSource('election', {
+      type: "vector",
+      url: "mapbox://mapbox.hist-pres-election-state"
+    })
+    map.addLayer({
+      id: 'election',
+      source: 'election',
+      "source-layer": "historical_pres_elections_state",
+      type: 'line',
+      paint: {
+        'line-color': '#555',
+        'line-width': ["case", ["==", ["get", "state_abbrev"], select_state.toUpperCase()], 2.5, 0.5]
+      }
+    });
 
     // var index = 0;
     fetch(state_configs[select_state].links).then(function(res) { return res.json() }).then(function(links) {
@@ -304,10 +317,10 @@ $(document).ready(function() {
         }
         row.append(cell);
       });
-      
+
     });
     $('#nation').DataTable({
-        order: [[ 4, "desc" ]]
+        order: [[ 3, "desc" ]]
       });
   });
 });
