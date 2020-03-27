@@ -8,33 +8,33 @@ var state_configs = {
     center: [-71.5, 42.12],
     zoom: 7,
     links: {
-      "40": "./ma_combined_results_20200327_40_util_euclidean.json",
-      "60": "./ma_combined_results_20200327_60_util_euclidean.json",
-      "80": "./ma_combined_results_20200327_80_util_euclidean.json"
+      "40": "./json/ma_combined_results_20200327_40_util_euclidean.json",
+      "60": "./json/ma_combined_results_20200327_60_util_euclidean.json",
+      "80": "./json/ma_combined_results_20200327_80_util_euclidean.json"
     },
     csvs: {
-      "40": "./ma_ed_inst_assignments_20200327_40_util_euclidean.csv",
-      "60": "./ma_ed_inst_assignments_20200327_60_util_euclidean.csv",
-      "80": "./ma_ed_inst_assignments_20200327_80_util_euclidean.csv"
+      "40": "./csv/ma_ed_inst_assignments_20200327_40_util_euclidean.csv",
+      "60": "./csv/ma_ed_inst_assignments_20200327_60_util_euclidean.csv",
+      "80": "./csv/ma_ed_inst_assignments_20200327_80_util_euclidean.csv"
     },
-    hospitals: "./ma_hospitals.geojson?v=4",
-    colleges: "./ma_colleges.geojson?v=4",
+    hospitals: "./geojson/ma_hospitals.geojson?v=4",
+    colleges: "./geojson/ma_colleges.geojson?v=4",
     name: "Massachusetts"
   },
   ny: {
     center: [-75.6, 43],
     zoom: 5,
-    links: "./NY_combined_results_20200325_v1.json?v=3",
-    hospitals: "./ny_hospitals.geojson",
-    colleges: "./ny_colleges.geojson",
+    links: "./json/NY_combined_results_20200325_v1.json?v=3",
+    hospitals: "./geojson/ny_hospitals.geojson",
+    colleges: "./geojson/ny_colleges.geojson",
     name: "New York"
   },
   mi: {
     center: [-85, 44.659],
     zoom: 4.7,
-    links: "./MI_combined_results_20200325_v1.json?v=3",
-    hospitals: "./mi_hospitals.geojson",
-    colleges: "./mi_colleges.geojson?v=2",
+    links: "./json/MI_combined_results_20200325_v1.json?v=3",
+    hospitals: "./geojson/mi_hospitals.geojson",
+    colleges: "./geojson/mi_colleges.geojson?v=2",
     name: "Michigan"
   }
 };
