@@ -126,6 +126,7 @@ th {
 }
 td {
   font-size: 85%;
+  text-align: center;
 }
 .paginate_button {
   padding: 10px !important;

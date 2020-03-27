@@ -270,7 +270,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   fetch("state_total_dorms_vs_beds.json").then(response => response.json()).then(function (states) {
-    console.log(states)
 
     states.forEach(function (state) {
       var row = $('<tr>');
@@ -295,8 +294,6 @@ $(document).ready(function() {
               <circle cx="40" cy="40" r="${40/scale}" fill="#0099cd" />
                </svg>`);
           }
-
-          
         }
         else {
           if (state[column]) {
@@ -305,9 +302,8 @@ $(document).ready(function() {
             : (1 * state[column]).toLocaleString());
           }
         }
-        
         row.append(cell);
-        });
+      });
       
     });
     $('#nation').DataTable({
