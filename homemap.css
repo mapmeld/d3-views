@@ -103,6 +103,12 @@ a {
   width: 80%;
   margin-left: 10%;
 }
+
+.table-container#nat {
+  width: 70%;
+  margin-left: 15%;
+}
+
 th {
   background: #000;
   color: #fff;
