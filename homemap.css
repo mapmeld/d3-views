@@ -23,24 +23,33 @@ body {
 }
 h1 {
   font-size: 240%;
-  line-height: 50%;
+  //line-height: 50%;
 }
 h2, h4 {
   font-weight: normal;
 }
 h3 {
-  line-height: 0%;
+  //line-height: 0%;
+  margin-bottom: 10px;
 }
 p, ul, h1, h2 {
   width: 70%;
   margin-left: 15%;
 }
-@media (max-width: 1000px) {
-  p, ul, h2, h3 {
-    width: 80%;
-    margin-left: 10%;
-  }
-}
+@media (max-width: 1000px) {    
+   p, ul, h2, h3 {    
+     width: 80%;    
+     margin-left: 10%;    
+   }    
+   h1 {   
+     font-size: 200%;   
+     line-height: 100%;   
+   }    
+   .map, .box, .table-container {   
+     width: 90%;    
+     margin: 0;   
+   }    
+ }
 .map {
   border: 1px solid #ccc;
   height: 500px;
