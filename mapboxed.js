@@ -7,7 +7,16 @@ var state_configs = {
   ma: {
     center: [-71.5, 42.12],
     zoom: 7,
-    links: "./ma_combined_results_20200325_v4.json",
+    links: {
+      "40": "./ma_combined_results_20200327_v3.json",
+      "60": "./ma_combined_results_20200327_v1.json",
+      "80": "./ma_combined_results_20200327_v2.json"
+    },
+    csvs: {
+      "40": "./ma_ed_inst_assignments_20200327_v3.csv",
+      "60": "./ma_ed_inst_assignments_20200327_v1.csv",
+      "80": "./ma_ed_inst_assignments_20200327_v2.csv"
+    },
     hospitals: "./ma_hospitals.geojson?v=4",
     colleges: "./ma_colleges.geojson?v=4",
     name: "Massachusetts"
@@ -15,7 +24,7 @@ var state_configs = {
   ny: {
     center: [-75.6, 43],
     zoom: 5,
-    links: "./NY_combined_results_20200325_v1.json",
+    links: "./NY_combined_results_20200325_v1.json?v=3",
     hospitals: "./ny_hospitals.geojson",
     colleges: "./ny_colleges.geojson",
     name: "New York"
@@ -23,7 +32,7 @@ var state_configs = {
   mi: {
     center: [-85, 44.659],
     zoom: 4.7,
-    links: "./MI_combined_results_20200325_v1.json",
+    links: "./MI_combined_results_20200325_v1.json?v=3",
     hospitals: "./mi_hospitals.geojson",
     colleges: "./mi_colleges.geojson?v=2",
     name: "Michigan"
@@ -32,8 +41,36 @@ var state_configs = {
 
 // $("#state_name_here").text(state_configs[select_state].name);
 
+var capacity = "60";
 function toggleLines(e) {
-  main_map.setPaintProperty('links', 'line-opacity', e.target.checked ? 1 : 0);
+  if (e.target.value === "0") {
+    // hide links
+    main_map.setPaintProperty('links', 'line-opacity', 0);
+  } else if (e.target.value === capacity) {
+    // show existing links
+    main_map.setPaintProperty('links', 'line-opacity', 1);
+  } else {
+    capacity = e.target.value;
+    main_map.setPaintProperty('links', 'line-opacity', 0);
+    fetch(state_configs["ma"].links[capacity]).then(function (res) { return res.json() }).then(function(links) {
+      main_map.getSource('links').setData(processLinks(links));
+      main_map.setPaintProperty('links', 'line-opacity', 1);
+    });
+    load_MA_CSV();
+  }
+}
+
+function processLinks(links) {
+  return {
+    type: "FeatureCollection",
+    features: links.map(function (link) {
+      return {
+        type: "Feature",
+        geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
+        properties: {weight:link.weight}
+      }
+    })
+  };
 }
 
 function processMaps(select_state) {
@@ -98,25 +135,18 @@ function processMaps(select_state) {
       }
     });
 
-    // var index = 0;
-    fetch(state_configs[select_state].links).then(function(res) { return res.json() }).then(function(links) {
+    var linkURL = (typeof state_configs[select_state].links === "object")
+        ? state_configs[select_state].links[capacity]
+        : state_configs[select_state].links;
+    fetch(linkURL).then(function(res) { return res.json() }).then(function(links) {
       // have links but want to add coordinates
 
       fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
        hospitals.features = hospitals.features.filter(feature => feature.properties.BEDS >= 10);
-       // console.log(hospitals.features.filter(feature => feature.properties.BEDS >= 10));
-
 
         hospitals.features.forEach(function (feature) {
-          // feature.id = index;
-          // index++;
 
           feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
-          links.forEach(function (link, index) {
-            if ([feature.properties.NAME, feature.properties.SHORTNAME].includes(link.hospital)) {
-              link.hospital = feature.geometry.coordinates;
-            }
-          });
 
           if (select_state === "ma") {
             var row = $('<tr>');
@@ -173,15 +203,7 @@ function processMaps(select_state) {
           });
 
           colleges.features.forEach(function(feature) {
-            // feature.id = index;
-            // index++;
             feature.properties.NAME = feature.properties.NAME || feature.properties.COLLEGE;
-
-            links.forEach(function (link, index) {
-              if (link.college === feature.properties.NAME) {
-                link.college = feature.geometry.coordinates;
-              }
-            });
           });
 
           map.addSource('colleges', {
@@ -189,16 +211,7 @@ function processMaps(select_state) {
             data: colleges
           });
 
-          var linkData = {
-            type: "FeatureCollection",
-            features: links.map(function (link) {
-              return {
-                type: "Feature",
-                geometry: {type:"LineString",coordinates:[link.hospital, link.college]},
-                properties: {weight:link.weight}
-              }
-            })
-          };
+          var linkData = processLinks(links);
 
           console.log(linkData.features.filter(function(f) {
             return (typeof f.geometry.coordinates[0] === "string") || (typeof f.geometry.coordinates[1] === "string")
@@ -251,33 +264,42 @@ processMaps("mi");
 processMaps("ny");
 
 // CSV stuff
-$(document).ready(function() {
-  $("#ma_map .no-script").html("");
-  if (select_state === "ma") {
-    fetch("./ma_ed_inst_assignments_20200325_v4.csv").then(function(res) { return res.text() }).then(function (college_csv) {
-      college_csv.split("\n").slice(1).forEach(function(r) {
-        var college = r.split(","),
-            row = $('<tr>');
-        if (!r.length) {
-          return;
-        }
-        $('#colleges tbody').append(row);
+var alreadyMadeTable = false;
+function load_MA_CSV() {
+  fetch(state_configs.ma.csvs[capacity]).then(function(res) { return res.text() }).then(function (college_csv) {
+    if (alreadyMadeTable) {
+      $('#colleges').DataTable().destroy();
+      $("#colleges tbody").html("");
+    }
+    
+    college_csv.split("\n").slice(1).forEach(function(r) {
+      var college = r.split(","),
+          row = $('<tr>');
+      if (!r.length) {
+        return;
+      }
+      $('#colleges tbody').append(row);
 
-        college.forEach(function (column) {
-          var cell = $('<td>');
-          if (column) {
-            cell.text(isNaN(1 * column)
-              ? column
-              : (1 * column).toLocaleString());
-          }
-          row.append(cell);
-        });
-      });
-      $('#colleges').DataTable({
-        order: [[ 5, "desc" ]]
+      college.forEach(function (column) {
+        var cell = $('<td>');
+        if (column) {
+          cell.text(isNaN(1 * column)
+            ? column
+            : (1 * column).toLocaleString());
+        }
+        row.append(cell);
       });
     });
-  }
+
+    alreadyMadeTable = true;
+    $('#colleges').DataTable({
+      order: [[ 5, "desc" ]]
+    });
+  });
+}
+$(document).ready(function() {
+  $("#ma_map .no-script").html("");
+  load_MA_CSV();
 });
 
 

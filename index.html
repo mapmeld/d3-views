@@ -53,10 +53,13 @@
           <span>Colleges</span>
         </li>
         <li class="legend">
-          <label>
-            <input id="travel_lines" type="checkbox" checked onchange="toggleLines(event)"/>
-            <span>Travel Lines</span>
-          </label>
+          <span>Assignments:</span>
+          <select id="travel_lines" onchange="toggleLines(event)"/>
+            <option value="0">No connections</option>
+            <option value="40">40% dorm capacity cap</option>
+            <option value="60" selected>60% dorm capacity cap</option>
+            <option value="80">80% dorm capacity cap</option>
+          </select>
         </li>
       </div>
       <div id="ma_map" class="map">
@@ -222,6 +225,6 @@
     <script src="//code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="//api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
-    <script src="./mapboxed.js?v=5"></script>
+    <script src="./mapboxed.js?v=6"></script>
   </body>
 </html>
