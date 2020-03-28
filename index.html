@@ -121,15 +121,15 @@
 
           <h3>Model Assumptions and Data Sources</h3>
           <p>
-            This is a <b>proof of principle model</b> intended to lend quantitative support to the qualitative
+            This is a <b>mathematical model and mapping tool</b> intended to lend quantitative support to the qualitative
             point that available dorm capacity is large enough to have a significant impact
             as the nation mobilizes infrastructure for COVID-19 treatment. (See <b>Nation at a Glance</b> below
             for a visualization showing all 50 states.)
           </p>
           <p>
-            For now, our model only includes flows of non-COVID patients (<i>P</i>) and medical personnel (<i>M</i>).
+            For now, our model only includes flows of non-COVID patients <i>(P)</i> and medical personnel <i>(M)</i>.
             We are working to sync up with a University of Washington model of projected COVID demand on hospitals
-            and will add recovering COVID patients (<i>C</i>) at that time.
+            and will add recovering COVID patients <i>(C)</i> at that time.
           </p>
           <p>
             The Department of Homeland Security provides national shapefiles of 
@@ -139,8 +139,8 @@
             parameters for hospital flows: we currently use discharge rates from previous years to estimate non-COVID patient
             demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
             non-essential procedures and an estimate of what share of patients are movable). We have removed psychiatric 
-            hospitals from the dataset. Share of dorm capacity that is avaiable for hospital use is left as a parameter in the model, 
-            considering that populations (<i>P</i>),(<i>C</i>),(<i>M</i>) will have to be housed separately and in suitable facilities.
+            hospitals from the dataset. Share of dorm capacity that is available for hospital use is left as a parameter in the model, 
+            considering that populations <i>(P)</i>,<i>(C)</i>,<i>(M)</i> will have to be housed separately and in suitable facilities.
           </p>
           <p>
             The model is run as a linear program to find optimal transport flows.  The mathematical formulation is 
@@ -148,6 +148,21 @@
             See <a href="https://github.com/mggg/covid-analysis">our GitHub repo</a> for full details of model structure
             and parameters.
           </p>
+          
+          <h3>How To Use This Model</h3>
+          <p>
+          We anticipate several uses for this model in keeping with its many estimates. 
+            <ul>
+              <li> Planners can look at the campuses in order of utilization (sort by last column in the Data Table) to glean a 
+                priority order for reaching out to university presidents to mobilize the campus response.
+              <li> Planners can look at regions of the state with long travel times to decide where other building types or new 
+                emergency facilities will best complement the campus response.
+              <li> Universities can set the 
+                mapping tool to reflect their own available dorm capacity, then receive an indication of which hospitals they are best suited to support. 
+            </ul>    
+          Because the quality of model output depends so critically on the quality of input data and assumptions, these uses
+          are better supported than planning around detailed assignment numbers of patients and medical staff.
+          </p> 
         </div>
       </div>
 
