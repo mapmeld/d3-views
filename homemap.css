@@ -15,10 +15,12 @@ body {
   width: 100%;
   color: #fff;
   margin: 0;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .container {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   width: 100%;
 }
 h1 {
