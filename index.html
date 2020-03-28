@@ -119,7 +119,7 @@
             care and provides support for front-line medical workers and other first responders.
           </p>
 
-          <h3>Model Assumptions</h3>
+          <h3>Model Assumptions and Data Sources</h3>
           <p>
             This is a <b>proof of principle model</b> intended to lend quantitative support to the qualitative
             point that available dorm capacity is large enough to have a significant impact
@@ -130,6 +130,15 @@
             For now, our model only includes flows of (1) non-COVID patients and (2) medical personnel.
             We are working to sync up with a University of Washington model of projected COVID demand on hospitals
             and will add (3) recovering COVID patients at that time.
+          </p>
+          <p>
+            The Department of Homeland Security provides national shapefiles of 
+            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities">universities</a> and 
+            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0">hospitals</a>.
+            We thank Michael Apkon of Tufts Medical Center and Assaad Sayah of Cambridge Health Alliance for suggesting rough 
+            parameters for hospital flows: we currently use discharge rates from previous years to estimate non-COVID patient
+            demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
+            non-essential procedures and an estimate of what share of patients are movable).
           </p>
           <p>
             See <a href="https://github.com/mggg/covid-analysis">our GitHub repo</a> for details of model structure
@@ -214,7 +223,7 @@
          We are grateful for the major support of the National Science Foundation through the Convergence Accelerator award OIA-1937095, Network Science of Census Data.
       </p>
       <p>
-        This project is a team effort of the MGGG Redistricting Lab with critical cooperation from Parker Rule and Olivia Walch.
+        This project is a team effort of the MGGG Redistricting Lab with critical collaboration from Parker Rule, Olivia Walch, and Austin Buchanan.
       </p>
 
 
@@ -224,7 +233,9 @@
 
       <h2>The Nation at a Glance</h2>
       <p>
-      Forty-nine out of fifty states have more dormitory beds than hospital beds, based on DHS datasets.  
+      Forty-nine out of fifty states have more dormitory beds than hospital beds, based on 
+        <a href="https://hifld-geoplatform.opendata.arcgis.com/search"DHS datasets</a>.  
+      Toggle the bubbles column to sort by the dorm-to-hospital ratio.  
       </p>
       <div id="nat" class="table-container">
         <table id="nation" class="table display">
