@@ -127,9 +127,9 @@
             for a visualization showing all 50 states.)
           </p>
           <p>
-            For now, our model only includes flows of (1) non-COVID patients and (2) medical personnel.
+            For now, our model only includes flows of non-COVID patients (<i>P</i>) and medical personnel (<i>M</i>).
             We are working to sync up with a University of Washington model of projected COVID demand on hospitals
-            and will add (3) recovering COVID patients at that time.
+            and will add recovering COVID patients (<i>C</i>) at that time.
           </p>
           <p>
             The Department of Homeland Security provides national shapefiles of 
@@ -140,7 +140,7 @@
             demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
             non-essential procedures and an estimate of what share of patients are movable). We have removed psychiatric 
             hospitals from the dataset. Share of dorm capacity that is avaiable for hospital use is left as a parameter in the model, 
-            considering that populations (1),(2),(3) will have to be housed separately and in suitable facilities.
+            considering that populations (<i>P</i>),(<i>C</i>),(<i>M</i>) will have to be housed separately and in suitable facilities.
           </p>
           <p>
             The model is run as a linear program to find optimal transport flows.  The mathematical formulation is 
