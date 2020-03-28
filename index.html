@@ -87,7 +87,7 @@
       <p>
         <em>
           Think we should adjust which colleges and hospitals are included?
-          Provide feedback <a href="https://forms.gle/YNYYGpTu7LTqW4XH6">here</a>.
+          Provide feedback <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" target="blank">here</a>.
         </em>
         <!-- <label class="floater">
           State:&nbsp;
@@ -133,8 +133,8 @@
           </p>
           <p>
             The Department of Homeland Security provides national shapefiles of 
-            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities">universities</a> and 
-            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0">hospitals</a>.
+            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities" target="blank">universities</a> and 
+            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0" target="blank">hospitals</a>.
             We thank Michael Apkon of Tufts Medical Center and Assaad Sayah of Cambridge Health Alliance for suggesting rough 
             parameters for hospital flows: we currently use discharge rates from previous years to estimate non-COVID patient
             demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
@@ -144,8 +144,8 @@
           </p>
           <p>
             The model is run as a linear program to find optimal transport flows.  The mathematical formulation is 
-            described <a href="https://mggg.org/uploads/COVID-LP.pdf">here</a>.
-            See <a href="https://github.com/mggg/covid-analysis">our GitHub repo</a> for full details of model structure
+            described <a href="https://mggg.org/uploads/COVID-LP.pdf" target="blank">here</a>.
+            See <a href="https://github.com/mggg/covid-analysis" target="blank">our GitHub repo</a> for full details of model structure
             and parameters.
           </p>
           
@@ -173,6 +173,14 @@
 
       <div class="table-container">
         <h2>Data Tables</h2>
+        <div style="padding: 5px">
+                <span>&nbsp;&nbsp;</span>
+                <select id="travel_lines" onchange="toggleLines(event)"/>
+                  <option value="40">40% dorm capacity cap</option>
+                  <option value="60" selected>60% dorm capacity cap</option>
+                  <option value="80">80% dorm capacity cap</option>
+                </select>
+        </div>
         <table id="colleges" class="table display">
           <thead>
             <tr>
@@ -219,7 +227,7 @@
       <br/>
       <em>
         Important Caveat: this is based on national-level datasets.<br/>
-        Contact us <a href="https://forms.gle/YNYYGpTu7LTqW4XH6">here</a> if you would like access to detailed modeling for your state.
+        Contact us <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" target="blank">here</a> if you would like access to detailed modeling for your state.
       </em>
 
       <br/>
@@ -231,7 +239,7 @@
         <li>
           Dr. Anthony P. Monaco, President of Tufts University, wrote an opinion piece on campus coronavirus response
           in the Boston Globe:
-          <a href="https://www.bostonglobe.com/2020/03/18/opinion/higher-educations-role-fighting-covid-19/">Tufts is prepared to house patients during the coronavirus outbreak, other colleges and universities should too</a>
+          <a href="https://www.bostonglobe.com/2020/03/18/opinion/higher-educations-role-fighting-covid-19/" target="blank">Tufts is prepared to house patients during the coronavirus outbreak, other colleges and universities should too</a>
         </li>
       </ul>
 
@@ -239,9 +247,9 @@
       <br/>
       <h3>About us</h3>
       <p>
-        <a href="https://mggg.org">MGGG Redistricting Lab</a>
-        is a research team of the <a href="https://tischcollege.tufts.edu/">Tisch College of Civic Life</a>
-         at <a href="https://tufts.edu">Tufts University</a>.
+        <a href="https://mggg.org" target="blank">MGGG Redistricting Lab</a>
+        is a research team of the <a href="https://tischcollege.tufts.edu/" target="blank">Tisch College of Civic Life</a>
+         at <a href="https://tufts.edu" target="blank">Tufts University</a>.
          We are grateful for the major support of the National Science Foundation through the Convergence Accelerator award OIA-1937095, Network Science of Census Data.
       </p>
       <p>
@@ -256,7 +264,7 @@
       <h2>The Nation at a Glance</h2>
       <p>
       Forty-nine out of fifty states have more dormitory beds than hospital beds, based on 
-        <a href="https://hifld-geoplatform.opendata.arcgis.com/search">DHS datasets</a>.  
+        <a href="https://hifld-geoplatform.opendata.arcgis.com/search" target="blank">DHS datasets</a>.  
       Toggle the bubbles column to sort by the dorm-to-hospital ratio.  
       </p>
       <div id="nat" class="table-container">
