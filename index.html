@@ -138,10 +138,14 @@
             We thank Michael Apkon of Tufts Medical Center and Assaad Sayah of Cambridge Health Alliance for suggesting rough 
             parameters for hospital flows: we currently use discharge rates from previous years to estimate non-COVID patient
             demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
-            non-essential procedures and an estimate of what share of patients are movable).
+            non-essential procedures and an estimate of what share of patients are movable). We have removed psychiatric 
+            hospitals from the dataset. Share of dorm capacity that is avaiable for hospital use is left as a parameter in the model, 
+            considering that populations (1),(2),(3) will have to be housed separately and in suitable facilities.
           </p>
           <p>
-            See <a href="https://github.com/mggg/covid-analysis">our GitHub repo</a> for details of model structure
+            The model is run as a linear program to find optimal transport flows.  The mathematical formulation is 
+            described <a href="https://mggg.org/uploads/COVID-LP.pdf">here</a>.
+            See <a href="https://github.com/mggg/covid-analysis">our GitHub repo</a> for full details of model structure
             and parameters.
           </p>
         </div>
@@ -234,7 +238,7 @@
       <h2>The Nation at a Glance</h2>
       <p>
       Forty-nine out of fifty states have more dormitory beds than hospital beds, based on 
-        <a href="https://hifld-geoplatform.opendata.arcgis.com/search"DHS datasets</a>.  
+        <a href="https://hifld-geoplatform.opendata.arcgis.com/search">DHS datasets</a>.  
       Toggle the bubbles column to sort by the dorm-to-hospital ratio.  
       </p>
       <div id="nat" class="table-container">
