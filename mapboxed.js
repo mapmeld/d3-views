@@ -171,6 +171,8 @@ function processMaps(select_state) {
         if (select_state === "ma") {
           $('#hospitals').DataTable({
             scrollY:        "400px",
+            scrollX: true,
+            autoWidth: false,
             scrollCollapse: true,
             paging:         false
           });
@@ -297,7 +299,9 @@ function load_MA_CSV() {
 
     alreadyMadeTable = true;
     $('#colleges').DataTable({
+      scrollX: true,
       scrollY:        "400px",
+      autoWidth: false,
       scrollCollapse: true,
       paging:         false,
       order: [[ 5, "desc" ]]
@@ -323,15 +327,14 @@ $(document).ready(function() {
           const h = 100;
           if (state["DORM_CAP"] > state["BEDS"]) {
             var scale = Math.sqrt(state["DORM_CAP"] / state["BEDS"]);
-
-            cell.html(`<svg height="80" width="80">
+            cell.html(`<svg height="80" width="80" title="${state["BEDS"] / state["DORM_CAP"]}">
               <circle cx="40" cy="40" r="40" fill="#0099cd" />
               <circle cx="40" cy="40" r="${40/scale}" fill="#ff4f49" />
                </svg>`);
           } else {
             var scale = Math.sqrt(state["BEDS"] / state["DORM_CAP"]);
 
-            cell.html(`<svg height="80" width="80">
+            cell.html(`<svg height="80" width="80" title="${state["BEDS"] / state["DORM_CAP"]}">
               <circle cx="40" cy="40" r="40" fill="#ff4f49" />
               <circle cx="40" cy="40" r="${40/scale}" fill="#0099cd" />
                </svg>`);
@@ -344,15 +347,21 @@ $(document).ready(function() {
             : (1 * state[column]).toLocaleString());
           }
         }
+        // console.log(cell);
         row.append(cell);
       });
 
     });
     $('#nation').DataTable({
-      scrollY:        "400px",
+      scrollY:        "800px",
+      scrollX: true,
+      autoWidth: false,
       scrollCollapse: true,
       paging:         false,
-        order: [[ 3, "desc" ]]
-      });
+      order: [[ 0, "asc" ]],
+      "columnDefs": [
+                { "type": "alt-string", targets: 1 }
+            ]
+      }).columns.adjust();
   });
 });
