@@ -192,21 +192,22 @@ function processMaps(select_state) {
             if (["Boston College", "Northeastern University"].includes(college.properties.COLLEGE)) {
               return college.properties.CAMPUS === "Main Campus";
             }
-            return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
-            "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
-            "Boston University", "Wentworth Institute of Technology",
-            "Northeastern University", "Framingham State University", "Harvard College", "Worcester State University",
-            "Eastern Nazarene College", "American International College", "Westfield State University",
-            "Bridgewater State University", "University of Massachusetts Dartmouth", "Massachusetts Maritime Academy",
-            "University of Massachusetts Dartmouth Center for Innovation and Entrepreneurship",
-            "Northpoint Bible College", "University of Massachusetts Lowell", "Fitchburg State University",
-            "Salem State University", "Lasell College", "Massachusetts College of Pharmacy and Health Science",
-            "Simmons College", "Regis College", "Nichols College", "Dean College", "Becker College",
-            "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
-            "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
-            "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
-            "Amherst College", "Lesley University", "Endicott College", "Gordon College", "Merrimack College", "Williams College"
-            ].includes(college.properties.COLLEGE.trim())
+            // return ["Wheaton College", "Stonehill College", "Springfield College", "Western New England University",
+            // "College of the Holy Cross", "Curry College", "Tufts University", "	Boston College",
+            // "Boston University", "Wentworth Institute of Technology",
+            // "Northeastern University", "Framingham State University", "Harvard College", "Worcester State University",
+            // "Eastern Nazarene College", "American International College", "Westfield State University",
+            // "Bridgewater State University", "University of Massachusetts Dartmouth", "Massachusetts Maritime Academy",
+            // "University of Massachusetts Dartmouth Center for Innovation and Entrepreneurship",
+            // "Northpoint Bible College", "University of Massachusetts Lowell", "Fitchburg State University",
+            // "Salem State University", "Lasell College", "Massachusetts College of Pharmacy and Health Science",
+            // "Simmons College", "Regis College", "Nichols College", "Dean College", "Becker College",
+            // "Emmanuel College", "Clark University","Mount Holyoke College","Worcester Polytechnic Institute","Wellesley College",
+            // "Assumption College","Babson College","Smith College","Hampshire College","Bentley University",
+            // "Emerson College", "Suffolk University", "Massachusetts Institute of Technology", "Brandeis University",
+            // "Amherst College", "Lesley University", "Endicott College", "Gordon College", "Merrimack College", "Williams College"
+            // ].includes(college.properties.COLLEGE.trim())
+            return true;
           });
 
           colleges.features.forEach(function(feature) {
