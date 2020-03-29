@@ -23,14 +23,16 @@ var state_configs = {
     center: [-71.5, 42.12],
     zoom: 7,
     links: {
-      "40": "./json/ma_combined_results_20200327_40_util_euclidean.json",
-      "60": "./json/ma_combined_results_20200327_60_util_euclidean.json",
-      "80": "./json/ma_combined_results_20200327_80_util_euclidean.json"
+      "20": "./json/MA_20200329_20_util_euclidean_combined_results.json",
+      "40": "./json/MA_20200329_40_util_euclidean_combined_results.json",
+      "60": "./json/MA_20200329_60_util_euclidean_combined_results.json",
+      "80": "./json/MA_20200329_80_util_euclidean_combined_results.json"
     },
     csvs: {
-      "40": "./csv/ma_ed_inst_assignments_20200327_40_util_euclidean.csv",
-      "60": "./csv/ma_ed_inst_assignments_20200327_60_util_euclidean.csv",
-      "80": "./csv/ma_ed_inst_assignments_20200327_80_util_euclidean.csv"
+      "20": "./csv/MA_20200329_20_util_euclidean_ed_inst_assignments.csv",
+      "40": "./csv/MA_20200329_40_util_euclidean_ed_inst_assignments.csv",
+      "60": "./csv/MA_20200329_60_util_euclidean_ed_inst_assignments.csv",
+      "80": "./csv/MA_20200329_80_util_euclidean_ed_inst_assignments.csv",
     },
     hospitals: "./geojson/ma_hospitals.geojson?v=4",
     colleges: "./geojson/ma_colleges.geojson?v=4",
@@ -56,7 +58,7 @@ var state_configs = {
 
 // $("#state_name_here").text(state_configs[select_state].name);
 
-var capacity = "60";
+var capacity = "40";
 function toggleLines(e) {
   if (e.target.value === "0") {
     // hide links
@@ -158,8 +160,12 @@ function processMaps(select_state) {
 
       fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
        hospitals.features = hospitals.features.filter(feature => feature.properties.BEDS >= 10);
-
-        hospitals.features.forEach(function (feature) {
+       pysch_hosps = ["Corrigan Mental Health Center", "Dr. Solomon Carter Fuller Mental Health Center", 
+                      "Pocasset Mental Health Center", "McLean Hospital", "McLean SouthEast", 
+                      "Amesbury Psychological Center"];
+       console.log( hospitals.features.map(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME))));
+       hospitals.features = hospitals.features.filter(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME)));
+       hospitals.features.forEach(function (feature) {
 
           feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
 
