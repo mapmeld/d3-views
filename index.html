@@ -119,7 +119,7 @@
             care and provides support for front-line medical workers and other first responders.
           </p>
 
-          <h3>Model Assumptions and Data Sources</h3>
+          <h3>Model assumptions and data sources</h3>
           <p>
             This is a <b>mathematical model and mapping tool</b> intended to lend quantitative support to the qualitative
             point that available dorm capacity is large enough to have a significant impact
@@ -127,31 +127,27 @@
             for a visualization showing all 50 states.)
           </p>
           <p>
-            For now, our model only includes flows of non-COVID patients <i>(P)</i> and medical personnel <i>(M)</i>.
+            For now, our model only includes flows of non-COVID patients and medical personnel.
             We are working to sync up with a University of Washington model of projected COVID demand on hospitals
-            and will add recovering COVID patients <i>(C)</i> at that time.
+            and will add recovering COVID patients at that time.
           </p>
           <p>
             The Department of Homeland Security provides national shapefiles of 
             <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities" target="blank">universities</a> and 
             <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0" target="blank">hospitals</a>.
-            We thank Michael Apkon of Tufts Medical Center and Assaad Sayah of Cambridge Health Alliance for suggesting rough 
-            parameters for hospital flows: we currently use discharge rates from previous years to estimate non-COVID patient
-            demand, discounted by 50% for community hospitals and 75% for academic hospitals (to reflect postponement of 
-            non-essential procedures and an estimate of what share of patients are movable). We have removed psychiatric 
-            hospitals from the dataset. Share of dorm capacity that is available for hospital use is left as a parameter in the model, 
-            considering that populations <i>(P)</i>,<i>(C)</i>,<i>(M)</i> will have to be housed separately and in suitable facilities.
+            Share of dorm capacity that is available for hospital use is left as a parameter in the model, 
+            considering that the three types of populations will have to be housed separately and in suitable facilities.
           </p>
           <p>
-            The model is run as a linear program to find optimal transport flows.  The mathematical formulation is 
+            The mathematical formulation is 
             described <a href="https://mggg.org/uploads/COVID-LP.pdf" target="blank">here</a>.
-            See <a href="https://github.com/mggg/covid-analysis" target="blank">our GitHub repo</a> for full details of model structure
-            and parameters.
+            See <a href="https://github.com/mggg/covid-analysis" target="blank">our GitHub repo</a> for full details of 
+            model structure and parameters.
           </p>
           
-          <h3>How To Use This Model</h3>
+          <h3>How to use this model</h3>
           <p>
-          We anticipate several uses for this model in keeping with its many estimates. 
+          We anticipate several uses for this model in keeping with its design. 
           </p>
             <ul>
               <li> Planners can look at the campuses in order of utilization (sort by last column in the Data Table) to glean a 
@@ -162,8 +158,8 @@
                 mapping tool to reflect their own available dorm capacity, then receive an indication of which hospitals they are best suited to support. 
             </ul>
           <p>
-          Because the quality of model output depends so critically on the quality of input data and assumptions, which are very
-            rough in this case, these uses
+          Because the precise model output depends so critically on the quality of input data and assumptions, which are 
+            necessarily very rough in this case, these uses
           are better supported than planning around detailed assignment numbers of patients and medical staff.
           </p> 
         </div>
