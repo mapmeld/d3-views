@@ -176,6 +176,7 @@ function processMaps(select_state) {
             scrollCollapse: true,
             paging:         false
           });
+          $("#hospitals-about").html(`<div>Showing ${hospitals.features.length} hospitals</div>`);
         }
 
         map.addSource('hospitals', {
@@ -306,6 +307,7 @@ function load_MA_CSV() {
       paging:         false,
       order: [[ 5, "desc" ]]
     });
+    $("#colleges-about").html(`<div>Showing ${college_csv.split("\n").slice(1).length} colleges</div>`);
   });
 }
 $(document).ready(function() {
@@ -327,16 +329,18 @@ $(document).ready(function() {
           const h = 100;
           if (state["DORM_CAP"] > state["BEDS"]) {
             var scale = Math.sqrt(state["DORM_CAP"] / state["BEDS"]);
-            cell.html(`<svg height="80" width="80" title="${state["BEDS"] / state["DORM_CAP"]}">
+            cell.html(`<svg height="80" width="80" alt="${state["BEDS"] / state["DORM_CAP"]}">
               <circle cx="40" cy="40" r="40" fill="#0099cd" />
               <circle cx="40" cy="40" r="${40/scale}" fill="#ff4f49" />
+              <title>${(state["DORM_CAP"]/state["BEDS"]).toFixed(3)}<title/>
                </svg>`);
           } else {
             var scale = Math.sqrt(state["BEDS"] / state["DORM_CAP"]);
 
-            cell.html(`<svg height="80" width="80" title="${state["BEDS"] / state["DORM_CAP"]}">
+            cell.html(`<svg height="80" width="80" alt="${state["BEDS"] / state["DORM_CAP"]}">
               <circle cx="40" cy="40" r="40" fill="#ff4f49" />
               <circle cx="40" cy="40" r="${40/scale}" fill="#0099cd" />
+              <title>${(state["DORM_CAP"]/state["BEDS"]).toFixed(3)}<title/>
                </svg>`);
           }
         }
@@ -362,6 +366,8 @@ $(document).ready(function() {
       "columnDefs": [
                 { "type": "alt-string", targets: 1 }
             ]
-      }).columns.adjust();
+      })//.columns.adjust();
+    $("#nation-about").html(`<div>Showing ${states.length} states</div>`);
   });
+  
 });
