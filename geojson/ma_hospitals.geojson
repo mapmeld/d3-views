@@ -13,7 +13,6 @@
 {"type":"Feature","properties":{"NAME":"Mount Auburn Hospital","SHORTNAME":"Mount Auburn Hospital","TOWN":"Cambridge","BEDS": 217},"geometry":{"type":"Point","coordinates":[-71.134237731536942,42.373894410361309]}},
 {"type":"Feature","properties":{"NAME":"CHA Cambridge Hospital","SHORTNAME":"Cambridge Hospital","TOWN":"Cambridge","BEDS": 189},"geometry":{"type":"Point","coordinates":[-71.104325770809723,42.374736409207436]}},
 {"type":"Feature","properties":{"NAME":"CHA Everett Hospital","SHORTNAME":"Everett Hospital","TOWN":"Everett","BEDS": 162},"geometry":{"type":"Point","coordinates":[-71.039749694068803,42.40932831657102]}},
-{"type":"Feature","properties":{"NAME":"Lawrence Memorial Hospital of Medford","SHORTNAME":"Lawrence Memorial Hospital of Medford","TOWN":"Medford","BEDS": 98},"geometry":{"type":"Point","coordinates":[-71.111497349292208,42.425969438694402]}},
 {"type":"Feature","properties":{"NAME":"Emerson Hospital","SHORTNAME":"Emerson Hospital","TOWN":"Concord","BEDS": 150},"geometry":{"type":"Point","coordinates":[-71.375983588227129,42.451598916770706]}},
 {"type":"Feature","properties":{"NAME":"Melrose-Wakefield Hospital","SHORTNAME":"Melrose-Wakefield Hospital","TOWN":"Melrose","BEDS": 174},"geometry":{"type":"Point","coordinates":[-71.061108246918408,42.460221791175222]}},
 {"type":"Feature","properties":{"NAME":"Winchester Hospital","SHORTNAME":"Winchester Hospital","TOWN":"Winchester","BEDS": 189},"geometry":{"type":"Point","coordinates":[-71.122785207313626,42.465974585719181]}},
