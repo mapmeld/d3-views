@@ -41,7 +41,7 @@ var state_configs = {
   ny: {
     center: [-75.6, 43],
     zoom: 5,
-    links: "./json/NY_combined_results_20200325_v1.json?v=3",
+    links: "./json/NY_20200329_40_util_travel_time_combined_results.json?v=3",
     hospitals: "./geojson/ny_hospitals.geojson",
     colleges: "./geojson/ny_colleges.geojson",
     name: "New York"
@@ -49,7 +49,7 @@ var state_configs = {
   mi: {
     center: [-85, 44.659],
     zoom: 4.7,
-    links: "./json/MI_combined_results_20200325_v1.json?v=3",
+    links: "./json/MI_20200329_40_util_travel_time_combined_results.json?v=3",
     hospitals: "./geojson/mi_hospitals.geojson",
     colleges: "./geojson/mi_colleges.geojson?v=2",
     name: "Michigan"
