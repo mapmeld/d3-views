@@ -69,13 +69,17 @@
           <span>Colleges</span>
         </li>
         <li class="legend">
+          <span class="circle orange"></span>
+          <span>Psychiatric Hospitals</span>
+        </li>
+        <li class="legend">
           <span>&nbsp;&nbsp;</span>
-          <select id="travel_lines" onchange="toggleLines(event)"/>
-            <option value="0">No connections</option>
+          <select id="travel_lines" onchange="toggleLines(event)" class="util" />
             <option value="20">20% dorm capacity cap</option>
             <option value="40" selected>40% dorm capacity cap</option>
             <option value="60">60% dorm capacity cap</option>
             <option value="80">80% dorm capacity cap</option>
+            <option value="0">No connections</option>
           </select>
         </li>
       </div>
@@ -168,7 +172,7 @@
         <h2>Data Tables</h2>
         <div style="padding: 5px">
                 <span>&nbsp;&nbsp;</span>
-                <select id="travel_lines" onchange="toggleLines(event)"/>
+                <select id="travel_lines" onchange="toggleLines(event)" class="util"/>
                   <option value="20">20% dorm capacity cap</option>
                   <option value="40" selected>40% dorm capacity cap</option>
                   <option value="60">60% dorm capacity cap</option>

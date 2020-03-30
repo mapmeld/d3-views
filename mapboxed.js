@@ -77,6 +77,12 @@ function toggleLines(e) {
   }
 }
 
+var $util = $(".util").on('change', function() {
+  if (this.value !== "0") {
+    $util.not(this).get(0).selectedIndex = this.selectedIndex;
+  }
+});
+
 function processLinks(links) {
   return {
     type: "FeatureCollection",
@@ -176,8 +182,10 @@ function processMaps(select_state) {
                       "Pocasset Mental Health Center",
                       "McLean Hospital", "McLean SouthEast", 
                       "Amesbury Psychological Center"];
-       console.log( hospitals.features.map(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME))));
+       const pysch_hospitals =  Object.assign({}, hospitals);
        hospitals.features = hospitals.features.filter(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME)));
+       pysch_hospitals.features = pysch_hospitals.features.filter(feature => (pysch_hosps.includes(feature.properties.FAC_NAME)));
+       console.log(pysch_hospitals);
        hospitals.features.forEach(function (feature) {
 
           feature.properties.NAME = feature.properties.NAME || feature.properties.FAC_NAME;
@@ -216,6 +224,11 @@ function processMaps(select_state) {
         map.addSource('hospitals', {
           type: 'geojson',
           data: hospitals
+        });
+
+        map.addSource('pysch_hospitals', {
+          type: 'geojson',
+          data: pysch_hospitals
         });
 
         fetch(state_configs[select_state].colleges).then(function(res) { return res.json() }).then(function(colleges) {
@@ -284,6 +297,18 @@ function processMaps(select_state) {
             }
           });
           hoverLayer('hospitals');
+
+          map.addLayer({
+            id: 'pysch_hospitals',
+            type: 'circle',
+            source: 'pysch_hospitals',
+            paint: {
+              'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
+              'circle-color': '#FFA500',
+              'circle-opacity': 0.9
+            }
+          });
+          hoverLayer('pysch_hospitals');
 
           map.addLayer({
             id: 'colleges',
