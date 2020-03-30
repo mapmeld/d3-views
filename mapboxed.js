@@ -77,6 +77,12 @@ function toggleLines(e) {
   }
 }
 
+var $util = $(".util").on('change', function() {
+  if (this.value !== "0") {
+    $util.not(this).get(0).selectedIndex = this.selectedIndex;
+  }
+});
+
 function processLinks(links) {
   return {
     type: "FeatureCollection",
@@ -284,6 +290,18 @@ function processMaps(select_state) {
             }
           });
           hoverLayer('hospitals');
+
+          // map.addLayer({
+          //   id: 'pysch_hospitals',
+          //   type: 'circle',
+          //   source: 'pysch_hospitals',
+          //   paint: {
+          //     'circle-radius': ["*", ["sqrt", ["get", "BEDS"]], 0.3],
+          //     'circle-color': '#999',
+          //     'circle-opacity': 0.9
+          //   }
+          // });
+          // hoverLayer('pysch_hospitals');
 
           map.addLayer({
             id: 'colleges',
