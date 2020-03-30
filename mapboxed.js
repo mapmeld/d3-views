@@ -160,8 +160,21 @@ function processMaps(select_state) {
 
       fetch(state_configs[select_state].hospitals).then(function(res) { return res.json() }).then(function(hospitals) {
        hospitals.features = hospitals.features.filter(feature => feature.properties.BEDS >= 10);
-       pysch_hosps = ["Corrigan Mental Health Center", "Dr. Solomon Carter Fuller Mental Health Center", 
-                      "Pocasset Mental Health Center", "McLean Hospital", "McLean SouthEast", 
+       pysch_hosps = ["Bournewood Hospital", 
+                      "Arbour Hospital",
+                      "Dr. Solomon Carter Fuller Mental Health Center", 
+                      "HRI Hospital", "Walden Behavioral Care", "BayRidge Hospital",
+                      "TaraVista Behavioral Health Center",
+                      "The Whittier Pavilion",
+                      "Worcester Recovery Center and Hospital",
+                      "Southcoast Behavioral Health",
+                      "High Point Treatment Center",
+                      "Taunton State Hospital",
+                      "Arbour-Fuller Hospital",
+                      "Pembroke Hospital",
+                      "Providence Behavioral Health Hospital",
+                      "Pocasset Mental Health Center",
+                      "McLean Hospital", "McLean SouthEast", 
                       "Amesbury Psychological Center"];
        console.log( hospitals.features.map(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME))));
        hospitals.features = hospitals.features.filter(feature => ! (pysch_hosps.includes(feature.properties.FAC_NAME)));
