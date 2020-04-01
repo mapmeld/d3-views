@@ -26,7 +26,7 @@
 {"type":"Feature","properties":{"COLLEGE":"Boston College","CAMPUS":"Main Campus","CITY":"Chestnut Hill","DORM_CAP":5635},"geometry":{"type":"Point","coordinates":[-71.168754,42.335013]}},
 {"type":"Feature","properties":{"COLLEGE":"Boston College","CAMPUS":"Newton Campus","CITY":"Newton","DORM_CAP":870},"geometry":{"type":"Point","coordinates":[-71.193953,42.341812]}},
 {"type":"Feature","properties":{"COLLEGE":"Boston College","CAMPUS":"Brighton Campus","CITY":"Brighton","DORM_CAP":1055},"geometry":{"type":"Point","coordinates":[-71.162594,42.343958]}},
-{"type":"Feature","properties":{"COLLEGE":"Harvard University","CAMPUS":"Medical School","CITY":"Boston","DORM_CAP":320},"geometry":{"type":"Point","coordinates":[-71.104113,42.335568]}},
+{"type":"Feature","properties":{"COLLEGE":"Harvard Medical School","CAMPUS":"Medical School","CITY":"Boston","DORM_CAP":320},"geometry":{"type":"Point","coordinates":[-71.104113,42.335568]}},
 {"type":"Feature","properties":{"COLLEGE":"Harvard College","CAMPUS":"Main Campus","CITY":"Cambridge","DORM_CAP":13254},"geometry":{"type":"Point","coordinates":[-71.121041,42.375786]}},
 {"type":"Feature","properties":{"COLLEGE":"Boston University School of Medicine","CAMPUS":"Medical Campus","CITY":"Boston","DORM_CAP":208},"geometry":{"type":"Point","coordinates":[-71.072455,42.336313]}},
 {"type":"Feature","properties":{"COLLEGE":"Boston University","CAMPUS":"Charles River Campus","CITY":"Boston","DORM_CAP":11524},"geometry":{"type":"Point","coordinates":[-71.099677,42.349596]}},
