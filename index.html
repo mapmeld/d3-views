@@ -69,10 +69,6 @@
           <span>Colleges</span>
         </li>
         <li class="legend">
-          <span class="circle orange"></span>
-          <span>Psychiatric Hospitals</span>
-        </li>
-        <li class="legend">
           <span>&nbsp;&nbsp;</span>
           <select id="travel_lines" onchange="toggleLines(event)" class="util" />
             <option value="20">20% dorm capacity cap</option>
@@ -128,7 +124,7 @@
           <p>
             This is a <b>mathematical model and mapping tool</b> intended to lend quantitative support to the qualitative
             point that available dorm capacity is large enough to have a significant impact
-            as the nation mobilizes infrastructure for COVID-19 treatment. (See <b>Nation at a Glance</b> below
+            as the nation mobilizes infrastructure for COVID-19 treatment. (See <b><a href="#at-a-glance">Nation at a Glance</a></b> below
             for a visualization showing all 50 states.)
             For now, our model only includes flows of non-COVID patients and medical personnel.
             We are working to sync up with a University of Washington model of projected COVID demand on hospitals
@@ -199,7 +195,7 @@
         <table id="hospitals" class="table display">
           <thead>
             <tr>
-              <th>Hospital</th>
+              <th>Hospitals included in the model</th>
               <th>City</th>
               <th>Number of beds</th>
             </tr>
@@ -261,7 +257,7 @@
       <br/>
       <br/>
 
-      <h2>The Nation at a Glance</h2>
+      <h2 id="at-a-glance">The Nation at a Glance</h2>
       <p>
       Forty-nine out of fifty states have more dormitory beds than hospital beds, based on 
         <a href="https://hifld-geoplatform.opendata.arcgis.com/search" target="blank">DHS datasets</a>.  
