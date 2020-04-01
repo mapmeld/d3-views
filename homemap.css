@@ -135,6 +135,25 @@ th {
   font-weight: bold;
   font-size: 90%;
 }
+
+/*.sorting_asc {
+    color: #ff4f49;
+  }
+
+.sorting_desc {
+    color: #ff4f49;
+  }*/
+
+table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+/*background-color: #FFE5E5;*/
+background-color: #eee;
+}
+
+table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+/*background-color: #FFCCCB;*/
+background-color: #ddd;
+}
+
 td {
   font-size: 85%;
   text-align: center;
@@ -167,9 +186,16 @@ td {
 }
 
 #mi_half, #ny_half {
-  width: 35%;
+  width: 70%;
   display: inline-block;
-  padding: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  #mi_half, #ny_half {
+    width: 35%;
+    display: inline-block;
+    padding: 10px;
+  }
 }
 
 #mi_map, #ny_map {
