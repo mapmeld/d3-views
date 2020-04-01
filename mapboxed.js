@@ -23,16 +23,16 @@ var state_configs = {
     center: [-71.5, 42.12],
     zoom: 7,
     links: {
-      "20": "./json/MA_20200329_20_util_euclidean_combined_results.json",
-      "40": "./json/MA_20200329_40_util_euclidean_combined_results.json",
-      "60": "./json/MA_20200329_60_util_euclidean_combined_results.json",
-      "80": "./json/MA_20200329_80_util_euclidean_combined_results.json"
+      "20": "./json/MA_20200331_20_util_euclidean_combined_results.json",
+      "40": "./json/MA_20200331_40_util_euclidean_combined_results.json",
+      "60": "./json/MA_20200331_60_util_euclidean_combined_results.json",
+      "80": "./json/MA_20200331_80_util_euclidean_combined_results.json"
     },
     csvs: {
-      "20": "./csv/MA_20200329_20_util_euclidean_ed_inst_assignments.csv",
-      "40": "./csv/MA_20200329_40_util_euclidean_ed_inst_assignments.csv",
-      "60": "./csv/MA_20200329_60_util_euclidean_ed_inst_assignments.csv",
-      "80": "./csv/MA_20200329_80_util_euclidean_ed_inst_assignments.csv",
+      "20": "./csv/MA_20200331_20_util_euclidean_ed_inst_assignments.csv",
+      "40": "./csv/MA_20200331_40_util_euclidean_ed_inst_assignments.csv",
+      "60": "./csv/MA_20200331_60_util_euclidean_ed_inst_assignments.csv",
+      "80": "./csv/MA_20200331_80_util_euclidean_ed_inst_assignments.csv",
     },
     hospitals: "./geojson/ma_hospitals.geojson?v=4",
     colleges: "./geojson/ma_colleges.geojson?v=4",
