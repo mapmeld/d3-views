@@ -37,8 +37,8 @@
         <strong>college campuses with largely vacated dormitories are in a unique position to
           provide additional beds and facilities to hospitals</strong>.
 
-        Dorms can be repurposed as alternative hospital sites to house recovering patients
-        and offer temporary lodging to medical personnel, coordinated through health care providers.
+        Dorms can be repurposed as alternative sites to house recovering patients
+        and offer temporary lodging to medical personnel, coordinated through hospital systems.
       </p>
       <p>
         At the MGGG Redistricting Lab, we usually study gerrymandering.  But with the same geodata
@@ -106,58 +106,45 @@
         <div class="col-sm-12">
           <h3>What are you seeing in these maps?</h3>
           <p>
-            Our model flows people from hospitals to universities in a way that respects
+            This is a <b>mathematical model and mapping tool</b> intended to lend quantitative support to a qualitative
+            point:  available dorm capacity can have a significant impact
+            as the nation mobilizes infrastructure for COVID-19 treatment. (See <b><a href="#at-a-glance">Nation at a Glance</a></b> below
+            for a visualization showing all 50 states.)
+          </p>
+          <p>
+            Our model flows people from hospitals to universities in a way that accounts for
             bed capacity and minimizes travel time.  Here are the separate populations
-            that will be transferred from hospitals to colleges:
+            that can be transferred from hospitals to colleges:
           </p>
           <ul>
+            <li>Medical personnel who need a place to sleep without exposing their families and home communities to risk</li>
             <li>Hospital patients with non-COVID conditions</li>
             <li>Hospital patients recovering from COVID</li>
-            <li>Medical personnel who need a place to sleep without exposing their families and home communities to risk</li>
           </ul>
           <p>
             By freeing beds, this alliance allows hospitals to convert more beds to critical
             care and provides support for front-line medical workers and other first responders.
           </p>
 
-          <h3>Model assumptions and data sources</h3>
-          <p>
-            This is a <b>mathematical model and mapping tool</b> intended to lend quantitative support to the qualitative
-            point that available dorm capacity is large enough to have a significant impact
-            as the nation mobilizes infrastructure for COVID-19 treatment. (See <b><a href="#at-a-glance">Nation at a Glance</a></b> below
-            for a visualization showing all 50 states.)
-            For now, our model only includes flows of non-COVID patients and medical personnel.
-            We are working to sync up with a University of Washington model of projected COVID demand on hospitals
-            and will add recovering COVID patients at that time.
-          </p>
-          <p>
-            The Department of Homeland Security provides national shapefiles of 
-            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities" target="blank">universities</a> and 
-            <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0" target="blank">hospitals</a>.
-            Share of dorm capacity that is available for hospital use is left as a parameter in the model, 
-            considering that the three types of populations will have to be housed separately and in suitable facilities.
-            The mathematical formulation is 
-            described <a href="https://mggg.org/uploads/COVID-LP.pdf" target="blank">here</a>.
-            See <a href="https://github.com/mggg/covid-analysis" target="blank">our GitHub repo</a> for full details of 
-            model structure and parameters.
-          </p>
+
           
           <h3>How to use this model</h3>
           <p>
           We anticipate several uses for this model in keeping with its design. 
           </p>
             <ul>
-              <li> Planners can look at the campuses in order of utilization (sort by last column in the Data Table) to glean a 
-                priority order for reaching out to university presidents to mobilize the campus response.
-              <li> Planners can look at regions of the state with long travel times to decide where other building types or new 
+              <li> <b>Priority campuses.</b> You can sort the campuses in order of utilization (last column 
+                in the Data Table) to glean a priority order for mobilizing the campus response.
+              <li> <b>Underserved areas.</b> Planners can look at regions of the state with long travel times to decide where other building types or new 
                 emergency facilities will best complement the campus response.
-              <li> Universities can set the 
-                mapping tool to reflect their own available dorm capacity, then receive an indication of which hospitals they are best suited to support. 
+              <li> <b>Well-matched hospitals.</b> Universities can set the 
+                mapping tool to reflect their own available dorm capacity, then receive an indication of which hospitals 
+                they are best suited to support. 
             </ul>
           <p>
-          Because the precise model output depends so critically on the quality of input data and assumptions, which are 
-            necessarily very rough in this case, these uses
-          are better supported than planning around detailed assignment numbers of patients and medical staff.
+          Precise model output depends critically on the quality of input data and assumptions, and the need for speed 
+          and generality makes those very approximate in this case.  Therefore the applications identified above are better 
+          supported by the model than relying on detailed assignment numbers of patients and medical staff.
           </p> 
         </div>
       </div>
@@ -208,6 +195,31 @@
 
       <br/><br/>
 
+          <h3>Model assumptions and data sources</h3>
+          <p>
+            The current model only includes flows of medical personnel and non-COVID patients.  This is <b>not</b> a 
+            predictive model.  
+            We are working to sync up with other models of projected COVID demand on hospitals
+            and will add recovering COVID patients at that time.
+          </p>
+          <p>
+            Share of dorm capacity that is available for hospital use is left as a parameter in the model, 
+            considering that the three types of populations will have to be housed separately and in suitable facilities.
+            The mathematical formulation is 
+            described <a href="https://mggg.org/uploads/COVID-LP.pdf" target="blank">here</a>, and data sourcing is 
+            found <a href="https://github.com/mggg/covid-analysis/tree/master/data" target="blank">here</a>.
+            See <a href="https://github.com/mggg/covid-analysis" target="blank">our GitHub repo</a> for full details of 
+            model structure and parameters.
+          </p>
+          <p>
+            We thank Michael Apkon of Tufts Medical Center, Assaad Sayah of Cambridge Health Alliance, 
+            Dawn Brantley of the Massachusetts Emergency Management Agency, and Ozlem Ergun of Northeastern University
+            for helpful discussions about model uses and design.
+          </p>
+
+      <br/><br/>
+
+
       <h2>Other states (beta)</h2>
       <div id="mi_half">
         <h4>Michigan</h4>
@@ -222,7 +234,7 @@
       <br/>
       <br/>
       <em>
-        Important Caveat: this is based on national-level datasets.<br/>
+        Caveat: this is based on national-level datasets.<br/>
         Contact us <a href="https://forms.gle/YNYYGpTu7LTqW4XH6" target="blank">here</a> if you would like access to detailed modeling for your state.
       </em>
 
@@ -234,7 +246,7 @@
       <ul>
         <li>
           Dr. Anthony P. Monaco, President of Tufts University, wrote an opinion piece on campus coronavirus response
-          in the Boston Globe:
+          in the Boston Globe on March 18:
           <a href="https://www.bostonglobe.com/2020/03/18/opinion/higher-educations-role-fighting-covid-19/" target="blank">Tufts is prepared to house patients during the coronavirus outbreak, other colleges and universities should too</a>
         </li>
       </ul>
@@ -249,7 +261,9 @@
          We are grateful for the major support of the National Science Foundation through the Convergence Accelerator award OIA-1937095, Network Science of Census Data.
       </p>
       <p>
-        This project is a team effort of the MGGG Redistricting Lab with critical collaboration from Parker Rule, Olivia Walch, and Austin Buchanan.
+        This project is a team effort of the MGGG Redistricting Lab with critical collaboration from 
+        <a href="https://github.com/pjrule" target="blank">Parker Rule</a>, <a href="http://oliviawalch.com/" target="blank">Olivia Walch</a>, and 
+        <a href="https://sites.google.com/site/austinlbuchanan/" target="blank">Austin Buchanan</a>.
       </p>
 
 
@@ -268,7 +282,7 @@
           <thead>
             <tr>
               <th>State</th>
-              <th>Dorms to Hospital Bed Ratio</th>
+              <th>Dorm-to-Hospital Bed Ratio</th>
               <th>Total Dorm Capacity</th>
               <th>Total Hospital Beds</th>
             </tr>
