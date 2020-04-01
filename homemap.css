@@ -136,16 +136,22 @@ th {
   font-size: 90%;
 }
 
-.sorting_asc {
-    color: #5dcaff;
+/*.sorting_asc {
+    color: #ff4f49;
   }
 
 .sorting_desc {
-    color: #5dcaff;
-  }
+    color: #ff4f49;
+  }*/
 
-.sorting_1 {
-  color: #004464;
+table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+/*background-color: #FFE5E5;*/
+background-color: #eee;
+}
+
+table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+/*background-color: #FFCCCB;*/
+background-color: #ddd;
 }
 
 td {
