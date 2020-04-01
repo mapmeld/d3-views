@@ -135,6 +135,19 @@ th {
   font-weight: bold;
   font-size: 90%;
 }
+
+.sorting_asc {
+    color: #5dcaff;
+  }
+
+.sorting_desc {
+    color: #5dcaff;
+  }
+
+.sorting_1 {
+  color: #004464;
+}
+
 td {
   font-size: 85%;
   text-align: center;
@@ -167,9 +180,16 @@ td {
 }
 
 #mi_half, #ny_half {
-  width: 35%;
+  width: 70%;
   display: inline-block;
-  padding: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  #mi_half, #ny_half {
+    width: 35%;
+    display: inline-block;
+    padding: 10px;
+  }
 }
 
 #mi_map, #ny_map {

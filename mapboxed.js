@@ -417,7 +417,7 @@ $(document).ready(function() {
 
     });
     $('#nation').DataTable({
-      scrollY:        "800px",
+      scrollY:        "625px",
       scrollX: true,
       autoWidth: false,
       scrollCollapse: true,
